@@ -1,0 +1,237 @@
+@charset "utf-8";
+
+div,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ol,
+textarea,
+th,
+td,
+body,
+table,
+a,
+img,
+span,
+strong,
+var,
+em,
+select,
+option {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+html,
+body,
+div,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ol,
+form,
+input,
+textarea,
+th,
+td,
+select {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+a,
+img,
+button,
+input,
+textarea,
+div {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+* {
+    box-sizing: border-box;
+    /* margin: 0;
+    padding: 0;*/
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    font-family: "Times New Roman";
+    font-size: 16px;
+    color: #333;
+}
+
+/*标题类型文字样式*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+img {
+    border: none;
+    vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+    /*display: block;*/
+    color: #333;
+}
+
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+input,
+textarea {
+    outline: none;
+    /* border: none; */
+}
+
+.btn_bigcircular {
+    height: 31px;
+    width: 31px;
+    border-radius: 20px;
+    border: 1px solid #fff;
+}
+
+.btn_scene {
+    height: 30px;
+    width: 30px;
+    border-radius: 17px;
+    border: 1px solid #fff;
+}
+
+.btn_smallcircular {
+    height: 24px;
+    width: 24px;
+    border-radius: 14px;
+    border: 1px solid #333;
+}
+
+.btn_bigsquare {
+    height: 35px;
+    width: 150px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    text-align: center;
+    color: #fff;
+    line-height: 35px;
+    font-size: 16px;
+}
+
+.btn_smallsquare {
+    width: 80px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    color: #fff;
+    line-height: 25px;
+    text-align: center;
+}
+
+.btn_normalsquare {
+    height: 30px;
+    width: 100px;
+    line-height: 30px;
+    border: 1px solid #fff;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    
+}
+
+.btn_bigsquare:hover,
+.btn_smallsquare:hover,
+.btn_normalsquare:hover {
+    background: #fff;
+    color: #484d55;
+}
+
+.input_small {
+    font-size: 14px;
+    height: 28px;
+    width: 140px;
+    float: right;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.input_big {
+    height: 28px;
+    width: 200px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border: 1px solid #333;
+}
+
+.input_title {
+    width: 150px;
+    height: 40px;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.select_normal {
+    font-size: 14px;
+    height: 28px;
+    width: 140px;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+
+.select_big {
+    height: 28px;
+    width: 200px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border: 1px solid #333;
+}
+
+.select_small {
+    height: 20px;
+    width: 74px;
+    border-radius: 5px;
+    border: 1px solid #333;
+}

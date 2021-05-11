@@ -1,0 +1,1133 @@
+{
+    "status": "SUCCESS",
+    "result": {
+        "command": {
+            "type": "get",
+            "command": "deviceinfo"
+        },
+        "data": [{
+                "_id": "5fb5c10682a85d2294d4b731",
+                "baseinfo": {
+                    "module": "sdvoe",
+                    "temperature": [],
+                    "id": "001ec0906ace",
+                    "firmware_version": "4.1.0.0",
+                    "type": 1,
+                    "alias": "解码器1",
+                    "active": true,
+                    "HandUp": false,
+                    "USBactive": true
+                },
+                "HDMI": [{
+                    "sink": [{
+                        "config": {
+                            "hdcp_output_mode": "FOLLOW_SINK_1"
+                        },
+                        "info": {
+                            "signal": {
+                                "video": {
+                                    "signalstate": false,
+                                    "aspect": "ASPECT_16_9",
+                                    "width": 1920,
+                                    "height": 1080,
+                                    "frames_per_second": 60,
+                                    "color_space": "RGB",
+                                    "bits_per_pixel": 8,
+                                    "scan_mode": "PROGRESSIVE",
+                                    "HDCPState": "HDCP_1_4"
+                                }
+                            }
+                        },
+                        "monitor": {
+                            "type": "video",
+                            "config": {},
+                            "state": {
+                                "connected": true,
+                                "edid": "00ffffffffffff0005e3902446020000151d010380351e782add75a5554e9d270b5054bfef00d1c0b30095008180814081c001010101565e00a0a0a02950302035000f282100001e000000fd00324c1e631e000a202020202020000000fc00513234393057310a2020202020000000ff00415039303932315a303035383201b302031ef14b101f051404130312021101230907078301000065030c001000023a801871382d40582c45000f282100001e011d007251d01e206e2855000f282100001e8c0ad08a20e02d10103e96000f28210000188c0ad090204031200c4055000f2821000018f03c00d051a0355060883a000f282100001c000000000000001d"
+                            }
+                        }
+                    }],
+                    "ability": {
+                        "bitmap_overlay": null
+                    },
+                    "subscript": [{
+                            "type": "video",
+                            "config": {
+                                "mac": null,
+                                "mode": "genlock",
+                                "template": null,
+                                "alias": "001ec0906ace-HDMI_Out"
+                            }
+                        },
+                        {
+                            "type": "audio",
+                            "config": {
+                                "mac": null,
+                                "index": 2,
+                                "audio_delay": 600,
+                                "alias": "001ec0906ace-HDMI_Audio_Out"
+                            }
+                        }
+                    ]
+                }],
+                "AnalogAudio": [{
+                    "config": {
+                        "enable": false,
+                        "alias": "001ec0906ace-Ana_Audio_Out",
+                        "direction": "OUTPUT",
+                        "source": {
+                            "mac": null,
+                            "select": 3
+                        }
+                    }
+                }],
+                "USB": {
+                    "mode": "REMOTE",
+                    "USBmac": "001b44100001",
+                    "alias": "USB_001ec0906ace",
+                    "pair": {
+                        "pair_status": false,
+                        "pair_device": null,
+                        "pair_dev_type": null,
+                        "pair_mac": null
+                    }
+                }
+            },
+            {
+                "_id": "5fb5c10682a85d2294d4b732",
+                "baseinfo": {
+                    "module": "sdvoe",
+                    "temperature": [],
+                    "id": "001ec0906ace",
+                    "firmware_version": "4.1.0.0",
+                    "type": 1,
+                    "alias": "解码器2",
+                    "active": true,
+                    "HandUp": false,
+                    "USBactive": true
+                },
+                "HDMI": [{
+                    "sink": [{
+                        "config": {
+                            "hdcp_output_mode": "FOLLOW_SINK_1"
+                        },
+                        "info": {
+                            "signal": {
+                                "video": {
+                                    "signalstate": true,
+                                    "aspect": "ASPECT_16_9",
+                                    "width": 1920,
+                                    "height": 1080,
+                                    "frames_per_second": 60,
+                                    "color_space": "RGB",
+                                    "bits_per_pixel": 8,
+                                    "scan_mode": "PROGRESSIVE",
+                                    "HDCPState": "HDCP_1_4"
+                                }
+                            }
+                        },
+                        "monitor": {
+                            "type": "video",
+                            "config": {},
+                            "state": {
+                                "connected": true,
+                                "edid": "00ffffffffffff0005e3902446020000151d010380351e782add75a5554e9d270b5054bfef00d1c0b30095008180814081c001010101565e00a0a0a02950302035000f282100001e000000fd00324c1e631e000a202020202020000000fc00513234393057310a2020202020000000ff00415039303932315a303035383201b302031ef14b101f051404130312021101230907078301000065030c001000023a801871382d40582c45000f282100001e011d007251d01e206e2855000f282100001e8c0ad08a20e02d10103e96000f28210000188c0ad090204031200c4055000f2821000018f03c00d051a0355060883a000f282100001c000000000000001d"
+                            }
+                        }
+                    }],
+                    "ability": {
+                        "bitmap_overlay": null
+                    },
+                    "subscript": [{
+                            "type": "video",
+                            "config": {
+                                "mac": null,
+                                "mode": "genlock",
+                                "template": null,
+                                "alias": "001ec0906ace-HDMI_Out"
+                            }
+                        },
+                        {
+                            "type": "audio",
+                            "config": {
+                                "mac": null,
+                                "index": 2,
+                                "audio_delay": 600,
+                                "alias": "001ec0906ace-HDMI_Audio_Out"
+                            }
+                        }
+                    ]
+                }],
+                "AnalogAudio": [{
+                    "config": {
+                        "enable": false,
+                        "alias": "001ec0906ace-Ana_Audio_Out",
+                        "direction": "OUTPUT",
+                        "source": {
+                            "mac": null,
+                            "select": 3
+                        }
+                    }
+                }],
+                "USB": {
+                    "mode": "REMOTE",
+                    "USBmac": "001b44100001",
+                    "alias": "USB_001ec0906ace",
+                    "pair": {
+                        "pair_status": false,
+                        "pair_device": null,
+                        "pair_dev_type": null,
+                        "pair_mac": null
+                    }
+                }
+            },
+            {
+                "_id": "5fb5c10682a85d2294d4b733",
+                "baseinfo": {
+                    "module": "sdvoe",
+                    "temperature": [],
+                    "id": "001ec0906ace",
+                    "firmware_version": "4.1.0.0",
+                    "type": 1,
+                    "alias": "解码器3",
+                    "active": true,
+                    "HandUp": false,
+                    "USBactive": true
+                },
+                "HDMI": [{
+                    "sink": [{
+                        "config": {
+                            "hdcp_output_mode": "FOLLOW_SINK_1"
+                        },
+                        "info": {
+                            "signal": {
+                                "video": {
+                                    "signalstate": true,
+                                    "aspect": "ASPECT_16_9",
+                                    "width": 1920,
+                                    "height": 1080,
+                                    "frames_per_second": 60,
+                                    "color_space": "RGB",
+                                    "bits_per_pixel": 8,
+                                    "scan_mode": "PROGRESSIVE",
+                                    "HDCPState": "HDCP_1_4"
+                                }
+                            }
+                        },
+                        "monitor": {
+                            "type": "video",
+                            "config": {},
+                            "state": {
+                                "connected": true,
+                                "edid": "00ffffffffffff0005e3902446020000151d010380351e782add75a5554e9d270b5054bfef00d1c0b30095008180814081c001010101565e00a0a0a02950302035000f282100001e000000fd00324c1e631e000a202020202020000000fc00513234393057310a2020202020000000ff00415039303932315a303035383201b302031ef14b101f051404130312021101230907078301000065030c001000023a801871382d40582c45000f282100001e011d007251d01e206e2855000f282100001e8c0ad08a20e02d10103e96000f28210000188c0ad090204031200c4055000f2821000018f03c00d051a0355060883a000f282100001c000000000000001d"
+                            }
+                        }
+                    }],
+                    "ability": {
+                        "bitmap_overlay": null
+                    },
+                    "subscript": [{
+                            "type": "video",
+                            "config": {
+                                "mac": null,
+                                "mode": "genlock",
+                                "template": null,
+                                "alias": "001ec0906ace-HDMI_Out"
+                            }
+                        },
+                        {
+                            "type": "audio",
+                            "config": {
+                                "mac": null,
+                                "index": 2,
+                                "audio_delay": 600,
+                                "alias": "001ec0906ace-HDMI_Audio_Out"
+                            }
+                        }
+                    ]
+                }],
+                "AnalogAudio": [{
+                    "config": {
+                        "enable": false,
+                        "alias": "001ec0906ace-Ana_Audio_Out",
+                        "direction": "OUTPUT",
+                        "source": {
+                            "mac": null,
+                            "select": 3
+                        }
+                    }
+                }],
+                "USB": {
+                    "mode": "REMOTE",
+                    "USBmac": "001b44100001",
+                    "alias": "USB_001ec0906ace",
+                    "pair": {
+                        "pair_status": false,
+                        "pair_device": null,
+                        "pair_dev_type": null,
+                        "pair_mac": null
+                    }
+                }
+            },
+            {
+                "_id": "5fb5c10682a85d2294d4b734",
+                "baseinfo": {
+                    "module": "sdvoe",
+                    "temperature": [],
+                    "id": "001ec0906ace",
+                    "firmware_version": "4.1.0.0",
+                    "type": 1,
+                    "alias": "解码器4",
+                    "active": true,
+                    "HandUp": false,
+                    "USBactive": true
+                },
+                "HDMI": [{
+                    "sink": [{
+                        "config": {
+                            "hdcp_output_mode": "FOLLOW_SINK_1"
+                        },
+                        "info": {
+                            "signal": {
+                                "video": {
+                                    "signalstate": true,
+                                    "aspect": "ASPECT_16_9",
+                                    "width": 1920,
+                                    "height": 1080,
+                                    "frames_per_second": 60,
+                                    "color_space": "RGB",
+                                    "bits_per_pixel": 8,
+                                    "scan_mode": "PROGRESSIVE",
+                                    "HDCPState": "HDCP_1_4"
+                                }
+                            }
+                        },
+                        "monitor": {
+                            "type": "video",
+                            "config": {},
+                            "state": {
+                                "connected": true,
+                                "edid": "00ffffffffffff0005e3902446020000151d010380351e782add75a5554e9d270b5054bfef00d1c0b30095008180814081c001010101565e00a0a0a02950302035000f282100001e000000fd00324c1e631e000a202020202020000000fc00513234393057310a2020202020000000ff00415039303932315a303035383201b302031ef14b101f051404130312021101230907078301000065030c001000023a801871382d40582c45000f282100001e011d007251d01e206e2855000f282100001e8c0ad08a20e02d10103e96000f28210000188c0ad090204031200c4055000f2821000018f03c00d051a0355060883a000f282100001c000000000000001d"
+                            }
+                        }
+                    }],
+                    "ability": {
+                        "bitmap_overlay": null
+                    },
+                    "subscript": [{
+                            "type": "video",
+                            "config": {
+                                "mac": null,
+                                "mode": "genlock",
+                                "template": null,
+                                "alias": "001ec0906ace-HDMI_Out"
+                            }
+                        },
+                        {
+                            "type": "audio",
+                            "config": {
+                                "mac": null,
+                                "index": 2,
+                                "audio_delay": 600,
+                                "alias": "001ec0906ace-HDMI_Audio_Out"
+                            }
+                        }
+                    ]
+                }],
+                "AnalogAudio": [{
+                    "config": {
+                        "enable": false,
+                        "alias": "001ec0906ace-Ana_Audio_Out",
+                        "direction": "OUTPUT",
+                        "source": {
+                            "mac": null,
+                            "select": 3
+                        }
+                    }
+                }],
+                "USB": {
+                    "mode": "REMOTE",
+                    "USBmac": "001b44100001",
+                    "alias": "USB_001ec0906ace",
+                    "pair": {
+                        "pair_status": false,
+                        "pair_device": null,
+                        "pair_dev_type": null,
+                        "pair_mac": null
+                    }
+                }
+            },
+            {
+                "_id": "5fb5c10682a85d2294d4b735",
+                "baseinfo": {
+                    "module": "sdvoe",
+                    "temperature": [],
+                    "id": "001ec0906ace",
+                    "firmware_version": "4.1.0.0",
+                    "type": 1,
+                    "alias": "解码器5",
+                    "active": true,
+                    "HandUp": false,
+                    "USBactive": true
+                },
+                "HDMI": [{
+                    "sink": [{
+                        "config": {
+                            "hdcp_output_mode": "FOLLOW_SINK_1"
+                        },
+                        "info": {
+                            "signal": {
+                                "video": {
+                                    "signalstate": true,
+                                    "aspect": "ASPECT_16_9",
+                                    "width": 1920,
+                                    "height": 1080,
+                                    "frames_per_second": 60,
+                                    "color_space": "RGB",
+                                    "bits_per_pixel": 8,
+                                    "scan_mode": "PROGRESSIVE",
+                                    "HDCPState": "HDCP_1_4"
+                                }
+                            }
+                        },
+                        "monitor": {
+                            "type": "video",
+                            "config": {},
+                            "state": {
+                                "connected": true,
+                                "edid": "00ffffffffffff0005e3902446020000151d010380351e782add75a5554e9d270b5054bfef00d1c0b30095008180814081c001010101565e00a0a0a02950302035000f282100001e000000fd00324c1e631e000a202020202020000000fc00513234393057310a2020202020000000ff00415039303932315a303035383201b302031ef14b101f051404130312021101230907078301000065030c001000023a801871382d40582c45000f282100001e011d007251d01e206e2855000f282100001e8c0ad08a20e02d10103e96000f28210000188c0ad090204031200c4055000f2821000018f03c00d051a0355060883a000f282100001c000000000000001d"
+                            }
+                        }
+                    }],
+                    "ability": {
+                        "bitmap_overlay": null
+                    },
+                    "subscript": [{
+                            "type": "video",
+                            "config": {
+                                "mac": null,
+                                "mode": "genlock",
+                                "template": null,
+                                "alias": "001ec0906ace-HDMI_Out"
+                            }
+                        },
+                        {
+                            "type": "audio",
+                            "config": {
+                                "mac": null,
+                                "index": 2,
+                                "audio_delay": 600,
+                                "alias": "001ec0906ace-HDMI_Audio_Out"
+                            }
+                        }
+                    ]
+                }],
+                "AnalogAudio": [{
+                    "config": {
+                        "enable": false,
+                        "alias": "001ec0906ace-Ana_Audio_Out",
+                        "direction": "OUTPUT",
+                        "source": {
+                            "mac": null,
+                            "select": 3
+                        }
+                    }
+                }],
+                "USB": {
+                    "mode": "REMOTE",
+                    "USBmac": "001b44100001",
+                    "alias": "USB_001ec0906ace",
+                    "pair": {
+                        "pair_status": false,
+                        "pair_device": null,
+                        "pair_dev_type": null,
+                        "pair_mac": null
+                    }
+                }
+            },
+            {
+                "_id": "5fb5c10682a85d2294d4b73a",
+                "baseinfo": {
+                    "module": "sdvoe",
+                    "temperature": [],
+                    "id": "001ec090b6d4",
+                    "firmware_version": "4.1.0.0",
+                    "type": 0,
+                    "alias": "编码器1",
+                    "active": true,
+                    "HandUp": false,
+                    "USBactive": false
+                },
+                "HDMI": [{
+                    "source": [{
+                        "config": {
+                            "edid": "00ffffffffffff002df3202400000000291c010380351d782e5995af4f42af260f5054bfef80e1c0d100d1c0b300a9c09500810081c008e80030f2705a80b0584a0012222100001a000000ff0030303030303030303030303030000000fd00283c0fcc3c000a202020202020000000fc004b4f494f53204b32343230550a01a5020342f24d61605a10050403021f1312015f23097f07830100006d030c001000387820006001020367d85dc40178c800e305e301e20f7f00e6060701605000e200f90474801871705a803020350055502100001e565e00a0a0a029503020350055502100001e000000000000000000000000000000000000000000000000009f",
+                            "hdcp_support_enable": true,
+                            "hdcp_22_support_disable": false
+                        },
+                        "info": {
+                            "signal": {
+                                "video": {
+                                    "signalstate": false,
+                                    "aspect": "ASPECT_NO_DATA"
+                                },
+                                "audio": {
+                                    "sampling_frequency": 44100,
+                                    "number_of_channels": 2,
+                                    "audio_encoding_type": "LPCM"
+                                }
+                            }
+                        }
+                    }],
+                    "ability": {
+                        "frame_rate_converter": {
+                            "configuration": {},
+                            "status": {
+                                "divide_factor": 2
+                            }
+                        },
+                        "thumbnail_generator": {
+                            "configuration": {
+                                "frame_rate": 20,
+                                "hdcp": true,
+                                "ssrc": 1024,
+                                "udp_port": 6972,
+                                "alias": "001ec090b6d4-THUMBNAIL-1",
+                                "enable": false,
+                                "HasAudio": true
+                            },
+                            "status": {
+                                "width": 0,
+                                "height": 0,
+                                "frame_rate": 0,
+                                "bits_per_comp": 8,
+                                "color_space": "YCBCR_422",
+                                "colorimetry": "BT601"
+                            }
+                        },
+                        "bitmap_overlay": null,
+                        "scaler": {
+                            "configuration": {
+                                "width": 1920,
+                                "height": 1080,
+                                "frame_rate_divider": true,
+                                "alias": "001ec090b6d4-HDMI-2",
+                                "enable": false,
+                                "HasAudio": null
+                            },
+                            "status": {
+                                "video": {
+                                    "width": 1920,
+                                    "height": 1080,
+                                    "frames_per_second": 0,
+                                    "color_space": "RGB",
+                                    "bits_per_pixel": 8,
+                                    "scan_mode": "PROGRESSIVE"
+                                }
+                            }
+                        }
+                    },
+                    "streams": [{
+                            "type": "video",
+                            "config": {
+                                "frame_rate_divider": false,
+                                "alias": "001ec090b6d4-HDMI-1",
+                                "enable": true,
+                                "HasAudio": true,
+                                "afv": true
+                            }
+                        },
+                        {
+                            "type": "video",
+                            "config": {
+                                "width": 1920,
+                                "height": 1080,
+                                "frame_rate_divider": true,
+                                "alias": "001ec090b6d4-HDMI-2",
+                                "enable": false,
+                                "HasAudio": null
+                            }
+                        },
+                        {
+                            "type": "video",
+                            "config": {
+                                "frame_rate": 20,
+                                "hdcp": true,
+                                "ssrc": 1024,
+                                "udp_port": 6972,
+                                "alias": "001ec090b6d4-THUMBNAIL-1",
+                                "enable": false,
+                                "HasAudio": true
+                            }
+                        },
+                        {
+                            "type": "audio",
+                            "conifg": {
+                                "enable": false,
+                                "alias": "001ec090b6d4-HDMI_Audio_In"
+                            }
+                        }
+                    ]
+                }],
+                "AnalogAudio": [{
+                    "type": "audio",
+                    "config": {
+                        "enable": false,
+                        "direction": "INPUT",
+                        "alias": "001ec090b6d4-Ana_Audio_In"
+                    },
+                    "ability": {
+                        "direction": true
+                    }
+                }]
+            },
+            {
+                "_id": "5fb5c10682a85d2294d4b73a",
+                "baseinfo": {
+                    "module": "sdvoe",
+                    "temperature": [],
+                    "id": "001ec090b6d4",
+                    "firmware_version": "4.1.0.0",
+                    "type": 0,
+                    "alias": "编码器2",
+                    "active": true,
+                    "HandUp": false,
+                    "USBactive": false
+                },
+                "HDMI": [{
+                    "source": [{
+                        "config": {
+                            "edid": "00ffffffffffff002df3202400000000291c010380351d782e5995af4f42af260f5054bfef80e1c0d100d1c0b300a9c09500810081c008e80030f2705a80b0584a0012222100001a000000ff0030303030303030303030303030000000fd00283c0fcc3c000a202020202020000000fc004b4f494f53204b32343230550a01a5020342f24d61605a10050403021f1312015f23097f07830100006d030c001000387820006001020367d85dc40178c800e305e301e20f7f00e6060701605000e200f90474801871705a803020350055502100001e565e00a0a0a029503020350055502100001e000000000000000000000000000000000000000000000000009f",
+                            "hdcp_support_enable": true,
+                            "hdcp_22_support_disable": false
+                        },
+                        "info": {
+                            "signal": {
+                                "video": {
+                                    "signalstate": false,
+                                    "aspect": "ASPECT_NO_DATA"
+                                },
+                                "audio": {
+                                    "sampling_frequency": 44100,
+                                    "number_of_channels": 2,
+                                    "audio_encoding_type": "LPCM"
+                                }
+                            }
+                        }
+                    }],
+                    "ability": {
+                        "frame_rate_converter": {
+                            "configuration": {},
+                            "status": {
+                                "divide_factor": 2
+                            }
+                        },
+                        "thumbnail_generator": {
+                            "configuration": {
+                                "frame_rate": 20,
+                                "hdcp": true,
+                                "ssrc": 1024,
+                                "udp_port": 6972,
+                                "alias": "001ec090b6d4-THUMBNAIL-1",
+                                "enable": false,
+                                "HasAudio": true
+                            },
+                            "status": {
+                                "width": 0,
+                                "height": 0,
+                                "frame_rate": 0,
+                                "bits_per_comp": 8,
+                                "color_space": "YCBCR_422",
+                                "colorimetry": "BT601"
+                            }
+                        },
+                        "bitmap_overlay": null,
+                        "scaler": {
+                            "configuration": {
+                                "width": 1920,
+                                "height": 1080,
+                                "frame_rate_divider": true,
+                                "alias": "001ec090b6d4-HDMI-2",
+                                "enable": false,
+                                "HasAudio": null
+                            },
+                            "status": {
+                                "video": {
+                                    "width": 1920,
+                                    "height": 1080,
+                                    "frames_per_second": 0,
+                                    "color_space": "RGB",
+                                    "bits_per_pixel": 8,
+                                    "scan_mode": "PROGRESSIVE"
+                                }
+                            }
+                        }
+                    },
+                    "streams": [{
+                            "type": "video",
+                            "config": {
+                                "frame_rate_divider": false,
+                                "alias": "001ec090b6d4-HDMI-1",
+                                "enable": true,
+                                "HasAudio": true,
+                                "afv": true
+                            }
+                        },
+                        {
+                            "type": "video",
+                            "config": {
+                                "width": 1920,
+                                "height": 1080,
+                                "frame_rate_divider": true,
+                                "alias": "001ec090b6d4-HDMI-2",
+                                "enable": false,
+                                "HasAudio": null
+                            }
+                        },
+                        {
+                            "type": "video",
+                            "config": {
+                                "frame_rate": 20,
+                                "hdcp": true,
+                                "ssrc": 1024,
+                                "udp_port": 6972,
+                                "alias": "001ec090b6d4-THUMBNAIL-1",
+                                "enable": false,
+                                "HasAudio": true
+                            }
+                        },
+                        {
+                            "type": "audio",
+                            "conifg": {
+                                "enable": false,
+                                "alias": "001ec090b6d4-HDMI_Audio_In"
+                            }
+                        }
+                    ]
+                }],
+                "AnalogAudio": [{
+                    "type": "audio",
+                    "config": {
+                        "enable": false,
+                        "direction": "INPUT",
+                        "alias": "001ec090b6d4-Ana_Audio_In"
+                    },
+                    "ability": {
+                        "direction": true
+                    }
+                }]
+            },
+            {
+                "_id": "5fb5c10682a85d2294d4b73a",
+                "baseinfo": {
+                    "module": "sdvoe",
+                    "temperature": [],
+                    "id": "001ec090b6d4",
+                    "firmware_version": "4.1.0.0",
+                    "type": 0,
+                    "alias": "编码器3",
+                    "active": true,
+                    "HandUp": false,
+                    "USBactive": false
+                },
+                "HDMI": [{
+                    "source": [{
+                        "config": {
+                            "edid": "00ffffffffffff002df3202400000000291c010380351d782e5995af4f42af260f5054bfef80e1c0d100d1c0b300a9c09500810081c008e80030f2705a80b0584a0012222100001a000000ff0030303030303030303030303030000000fd00283c0fcc3c000a202020202020000000fc004b4f494f53204b32343230550a01a5020342f24d61605a10050403021f1312015f23097f07830100006d030c001000387820006001020367d85dc40178c800e305e301e20f7f00e6060701605000e200f90474801871705a803020350055502100001e565e00a0a0a029503020350055502100001e000000000000000000000000000000000000000000000000009f",
+                            "hdcp_support_enable": true,
+                            "hdcp_22_support_disable": false
+                        },
+                        "info": {
+                            "signal": {
+                                "video": {
+                                    "signalstate": true,
+                                    "aspect": "ASPECT_NO_DATA"
+                                },
+                                "audio": {
+                                    "sampling_frequency": 44100,
+                                    "number_of_channels": 2,
+                                    "audio_encoding_type": "LPCM"
+                                }
+                            }
+                        }
+                    }],
+                    "ability": {
+                        "frame_rate_converter": {
+                            "configuration": {},
+                            "status": {
+                                "divide_factor": 2
+                            }
+                        },
+                        "thumbnail_generator": {
+                            "configuration": {
+                                "frame_rate": 20,
+                                "hdcp": true,
+                                "ssrc": 1024,
+                                "udp_port": 6972,
+                                "alias": "001ec090b6d4-THUMBNAIL-1",
+                                "enable": false,
+                                "HasAudio": true
+                            },
+                            "status": {
+                                "width": 0,
+                                "height": 0,
+                                "frame_rate": 0,
+                                "bits_per_comp": 8,
+                                "color_space": "YCBCR_422",
+                                "colorimetry": "BT601"
+                            }
+                        },
+                        "bitmap_overlay": null,
+                        "scaler": {
+                            "configuration": {
+                                "width": 1920,
+                                "height": 1080,
+                                "frame_rate_divider": true,
+                                "alias": "001ec090b6d4-HDMI-2",
+                                "enable": false,
+                                "HasAudio": null
+                            },
+                            "status": {
+                                "video": {
+                                    "width": 1920,
+                                    "height": 1080,
+                                    "frames_per_second": 0,
+                                    "color_space": "RGB",
+                                    "bits_per_pixel": 8,
+                                    "scan_mode": "PROGRESSIVE"
+                                }
+                            }
+                        }
+                    },
+                    "streams": [{
+                            "type": "video",
+                            "config": {
+                                "frame_rate_divider": false,
+                                "alias": "001ec090b6d4-HDMI-1",
+                                "enable": true,
+                                "HasAudio": true,
+                                "afv": true
+                            }
+                        },
+                        {
+                            "type": "video",
+                            "config": {
+                                "width": 1920,
+                                "height": 1080,
+                                "frame_rate_divider": true,
+                                "alias": "001ec090b6d4-HDMI-2",
+                                "enable": false,
+                                "HasAudio": null
+                            }
+                        },
+                        {
+                            "type": "video",
+                            "config": {
+                                "frame_rate": 20,
+                                "hdcp": true,
+                                "ssrc": 1024,
+                                "udp_port": 6972,
+                                "alias": "001ec090b6d4-THUMBNAIL-1",
+                                "enable": false,
+                                "HasAudio": true
+                            }
+                        },
+                        {
+                            "type": "audio",
+                            "conifg": {
+                                "enable": false,
+                                "alias": "001ec090b6d4-HDMI_Audio_In"
+                            }
+                        }
+                    ]
+                }],
+                "AnalogAudio": [{
+                    "type": "audio",
+                    "config": {
+                        "enable": false,
+                        "direction": "INPUT",
+                        "alias": "001ec090b6d4-Ana_Audio_In"
+                    },
+                    "ability": {
+                        "direction": true
+                    }
+                }],
+                
+            },
+            {
+                "_id": "5fb5c10682a85d2294d4b73a",
+                "baseinfo": {
+                    "module": "sdvoe",
+                    "temperature": [],
+                    "id": "001ec090b6d4",
+                    "firmware_version": "4.1.0.0",
+                    "type": 0,
+                    "alias": "编码器4",
+                    "active": true,
+                    "HandUp": false,
+                    "USBactive": false
+                },
+                "HDMI": [{
+                    "source": [{
+                        "config": {
+                            "edid": "00ffffffffffff002df3202400000000291c010380351d782e5995af4f42af260f5054bfef80e1c0d100d1c0b300a9c09500810081c008e80030f2705a80b0584a0012222100001a000000ff0030303030303030303030303030000000fd00283c0fcc3c000a202020202020000000fc004b4f494f53204b32343230550a01a5020342f24d61605a10050403021f1312015f23097f07830100006d030c001000387820006001020367d85dc40178c800e305e301e20f7f00e6060701605000e200f90474801871705a803020350055502100001e565e00a0a0a029503020350055502100001e000000000000000000000000000000000000000000000000009f",
+                            "hdcp_support_enable": true,
+                            "hdcp_22_support_disable": false
+                        },
+                        "info": {
+                            "signal": {
+                                "video": {
+                                    "signalstate": false,
+                                    "aspect": "ASPECT_NO_DATA"
+                                },
+                                "audio": {
+                                    "sampling_frequency": 44100,
+                                    "number_of_channels": 2,
+                                    "audio_encoding_type": "LPCM"
+                                }
+                            }
+                        }
+                    }],
+                    "ability": {
+                        "frame_rate_converter": {
+                            "configuration": {},
+                            "status": {
+                                "divide_factor": 2
+                            }
+                        },
+                        "thumbnail_generator": {
+                            "configuration": {
+                                "frame_rate": 20,
+                                "hdcp": true,
+                                "ssrc": 1024,
+                                "udp_port": 6972,
+                                "alias": "001ec090b6d4-THUMBNAIL-1",
+                                "enable": false,
+                                "HasAudio": true
+                            },
+                            "status": {
+                                "width": 0,
+                                "height": 0,
+                                "frame_rate": 0,
+                                "bits_per_comp": 8,
+                                "color_space": "YCBCR_422",
+                                "colorimetry": "BT601"
+                            }
+                        },
+                        "bitmap_overlay": null,
+                        "scaler": {
+                            "configuration": {
+                                "width": 1920,
+                                "height": 1080,
+                                "frame_rate_divider": true,
+                                "alias": "001ec090b6d4-HDMI-2",
+                                "enable": false,
+                                "HasAudio": null
+                            },
+                            "status": {
+                                "video": {
+                                    "width": 1920,
+                                    "height": 1080,
+                                    "frames_per_second": 0,
+                                    "color_space": "RGB",
+                                    "bits_per_pixel": 8,
+                                    "scan_mode": "PROGRESSIVE"
+                                }
+                            }
+                        }
+                    },
+                    "streams": [{
+                            "type": "video",
+                            "config": {
+                                "frame_rate_divider": false,
+                                "alias": "001ec090b6d4-HDMI-1",
+                                "enable": true,
+                                "HasAudio": true,
+                                "afv": true
+                            }
+                        },
+                        {
+                            "type": "video",
+                            "config": {
+                                "width": 1920,
+                                "height": 1080,
+                                "frame_rate_divider": true,
+                                "alias": "001ec090b6d4-HDMI-2",
+                                "enable": false,
+                                "HasAudio": null
+                            }
+                        },
+                        {
+                            "type": "video",
+                            "config": {
+                                "frame_rate": 20,
+                                "hdcp": true,
+                                "ssrc": 1024,
+                                "udp_port": 6972,
+                                "alias": "001ec090b6d4-THUMBNAIL-1",
+                                "enable": false,
+                                "HasAudio": true
+                            }
+                        },
+                        {
+                            "type": "audio",
+                            "conifg": {
+                                "enable": false,
+                                "alias": "001ec090b6d4-HDMI_Audio_In"
+                            }
+                        }
+                    ]
+                }],
+                "AnalogAudio": [{
+                    "type": "audio",
+                    "config": {
+                        "enable": false,
+                        "direction": "INPUT",
+                        "alias": "001ec090b6d4-Ana_Audio_In"
+                    },
+                    "ability": {
+                        "direction": true
+                    }
+                }]
+            },
+            {
+                "_id": "5fb5c10682a85d2294d4b73a",
+                "baseinfo": {
+                    "module": "sdvoe",
+                    "temperature": [],
+                    "id": "001ec090b6d4",
+                    "firmware_version": "4.1.0.0",
+                    "type": 0,
+                    "alias": "编码器5",
+                    "active": true,
+                    "HandUp": false,
+                    "USBactive": false
+                },
+                "HDMI": [{
+                    "source": [{
+                        "config": {
+                            "edid": "00ffffffffffff002df3202400000000291c010380351d782e5995af4f42af260f5054bfef80e1c0d100d1c0b300a9c09500810081c008e80030f2705a80b0584a0012222100001a000000ff0030303030303030303030303030000000fd00283c0fcc3c000a202020202020000000fc004b4f494f53204b32343230550a01a5020342f24d61605a10050403021f1312015f23097f07830100006d030c001000387820006001020367d85dc40178c800e305e301e20f7f00e6060701605000e200f90474801871705a803020350055502100001e565e00a0a0a029503020350055502100001e000000000000000000000000000000000000000000000000009f",
+                            "hdcp_support_enable": true,
+                            "hdcp_22_support_disable": false
+                        },
+                        "info": {
+                            "signal": {
+                                "video": {
+                                    "signalstate": false,
+                                    "aspect": "ASPECT_NO_DATA"
+                                },
+                                "audio": {
+                                    "sampling_frequency": 44100,
+                                    "number_of_channels": 2,
+                                    "audio_encoding_type": "LPCM"
+                                }
+                            }
+                        }
+                    }],
+                    "ability": {
+                        "frame_rate_converter": {
+                            "configuration": {},
+                            "status": {
+                                "divide_factor": 2
+                            }
+                        },
+                        "thumbnail_generator": {
+                            "configuration": {
+                                "frame_rate": 20,
+                                "hdcp": true,
+                                "ssrc": 1024,
+                                "udp_port": 6972,
+                                "alias": "001ec090b6d4-THUMBNAIL-1",
+                                "enable": false,
+                                "HasAudio": true
+                            },
+                            "status": {
+                                "width": 0,
+                                "height": 0,
+                                "frame_rate": 0,
+                                "bits_per_comp": 8,
+                                "color_space": "YCBCR_422",
+                                "colorimetry": "BT601"
+                            }
+                        },
+                        "bitmap_overlay": null,
+                        "scaler": {
+                            "configuration": {
+                                "width": 1920,
+                                "height": 1080,
+                                "frame_rate_divider": true,
+                                "alias": "001ec090b6d4-HDMI-2",
+                                "enable": false,
+                                "HasAudio": null
+                            },
+                            "status": {
+                                "video": {
+                                    "width": 1920,
+                                    "height": 1080,
+                                    "frames_per_second": 0,
+                                    "color_space": "RGB",
+                                    "bits_per_pixel": 8,
+                                    "scan_mode": "PROGRESSIVE"
+                                }
+                            }
+                        }
+                    },
+                    "streams": [{
+                            "type": "video",
+                            "config": {
+                                "frame_rate_divider": false,
+                                "alias": "001ec090b6d4-HDMI-1",
+                                "enable": true,
+                                "HasAudio": true,
+                                "afv": true
+                            }
+                        },
+                        {
+                            "type": "video",
+                            "config": {
+                                "width": 1920,
+                                "height": 1080,
+                                "frame_rate_divider": true,
+                                "alias": "001ec090b6d4-HDMI-2",
+                                "enable": false,
+                                "HasAudio": null
+                            }
+                        },
+                        {
+                            "type": "video",
+                            "config": {
+                                "frame_rate": 20,
+                                "hdcp": true,
+                                "ssrc": 1024,
+                                "udp_port": 6972,
+                                "alias": "001ec090b6d4-THUMBNAIL-1",
+                                "enable": false,
+                                "HasAudio": true
+                            }
+                        },
+                        {
+                            "type": "audio",
+                            "conifg": {
+                                "enable": false,
+                                "alias": "001ec090b6d4-HDMI_Audio_In"
+                            }
+                        }
+                    ]
+                }],
+                "AnalogAudio": [{
+                    "type": "audio",
+                    "config": {
+                        "enable": false,
+                        "direction": "INPUT",
+                        "alias": "001ec090b6d4-Ana_Audio_In"
+                    },
+                    "ability": {
+                        "direction": true
+                    }
+                }]
+            }
+        ]
+    },
+    "error": null,
+    "Timestamp": 123465413
+}
