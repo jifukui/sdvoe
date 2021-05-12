@@ -1,10 +1,10 @@
-import {  message, notification } from "ant-design-vue";
-function NameChecked(value,info){
+import { message, notification } from "ant-design-vue";
+function NameChecked(value, info) {
     let flag = false
-    if(typeof value === "string"){
-          flag = !(value.match(/\s/g).length===value.length);
+    if (typeof value === "string") {
+        flag = !(value.match(/\s/g) && value.match(/\s/g).length === value.length);
     }
-    if(!flag){
+    if (!flag) {
         notification.warning({
             message: info,
             duration: 1,
@@ -13,4 +13,4 @@ function NameChecked(value,info){
     return flag;
 }
 
-export  {NameChecked}
+export { NameChecked }

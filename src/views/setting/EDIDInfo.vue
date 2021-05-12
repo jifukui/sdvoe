@@ -68,7 +68,7 @@
                   <div class="edidmodel">{{ edidmodel }}</div>
                 </span>
               </div>
-              <div v-show="!edidread && toArr.length != 0">
+              <div v-show="edidread && toArr.length != 0">
                 <p>从</p>
                 <p style="font-size: 14px; line-height: 16px">{{ fromname }}</p>
                 <p>拷贝到</p>
@@ -401,6 +401,8 @@ export default {
             message: "EDID拷贝成功",
             duration: 1,
           });
+          that.allcheck = false;
+          that.checkAll();
         } else {
           notification.error({
             message: "EDID拷贝失败",
@@ -427,8 +429,6 @@ export default {
           responseEncoding: "ascii",
         })
         .then(function (res) {
-          console.log("the res is ");
-          console.dir(res);
           if (res.status == 200) {
             const downloadElement = document.createElement("a");
             const href = window.URL.createObjectURL(res.data);
