@@ -331,9 +331,10 @@
 </template>
 
 <script>
+const spacewarn = "电视墙名称不能全是空格，请重试"
 import viewCon from "../../components/viewContent";
 import { Modal, message, notification } from "ant-design-vue";
-// import {namecheck} from "../../js/namespace";
+import * as namecheck   from "../../js/namespace";
 export default {
   name: "Wall",
   components: {
@@ -481,7 +482,6 @@ export default {
             that.$store.state.wallConPage = false;
           },
           onOk() {
-            console.log("dwqdwq")
             if (that.wallname == "") {
               notification.warning({
                 message: "电视墙名称不能为空，请重试",
@@ -501,16 +501,10 @@ export default {
                 }
               }
             }
-            // if (that.wallname.indexOf(" ") != -1) {
-            //   notification.warning({
-            //     message: "电视墙名称不能出现空格，请重试",
-            //     duration: 1,
-            //   });
-            //   return;
-            // }
-            // console.log("jifukui herer");
-            // console.log(that.wallname)
-            // namecheck("       ");
+            // jifukui
+            if(!namecheck.NameChecked(that.wallname,spacewarn)){
+              return;
+            }
             let len = 0;
             for (let i = 0; i < that.wallname.length; i++) {
               if (
@@ -579,7 +573,6 @@ export default {
       this.allheight = row * this.boxheight;
       this.walllayout = [row, column];
       let arr = [];
-      console.log(row, column);
       if (state) {
         for (let i = 0; i < row; i++) {
           for (let j = 0; j < column; j++) {
@@ -667,7 +660,6 @@ export default {
     boxView(index) {
       this.boxIndex = index + 1;
       this.allBoxSelect = false;
-      console.log(index);
     },
     dropOverOne(ev, index) {
       if (
@@ -686,7 +678,6 @@ export default {
             this.layoutMsg[i].device = "";
           }
         }
-        console.log(this.layoutMsg, this.$store.state.fromid);
         for (let i = 0; i < this.nameMsg.length; i++) {
           if (this.nameMsg[i].device == this.$store.state.fromname) {
             this.nameMsg[i].device = "";
@@ -702,9 +693,6 @@ export default {
             this.nameMsg[i].device = this.$store.state.fromname;
           }
         }
-
-        console.log(this.$store.state.fromid, this.$store.state.fromname);
-        console.log(this.layoutMsg[index].device, this.nameMsg[index].device);
         let layoutMsg = JSON.parse(JSON.stringify(this.nameMsg));
         let deviceInfo = this.$store.state.deviceInfo.device;
         for (let j = 0; j < layoutMsg.length; j++) {
@@ -717,10 +705,8 @@ export default {
         }
         this.layoutMsg = layoutMsg;
       } else {
-        console.log("index", index);
         let valueto = this.layoutMsg[index].device;
         let valuefrom = this.layoutMsg[this.fromindex].device;
-        console.log(valueto, valuefrom);
         this.layoutMsg[index].device = valuefrom;
         this.layoutMsg[this.fromindex].device = valueto;
         let valueto1 = this.nameMsg[index].device;
@@ -728,8 +714,6 @@ export default {
         this.nameMsg[index].device = valuefrom1;
         this.nameMsg[this.fromindex].device = valueto1;
       }
-      console.log("layoutmsg", this.layoutMsg);
-      console.log("namemsg", this.nameMsg);
       this.showoutV = JSON.parse(JSON.stringify(this.outVCon));
       this.showinV = [];
       for (let j = 0; j < this.outVCon.length; j++) {
@@ -887,13 +871,9 @@ export default {
           len++;
         }
       }
-      // if (this.addwallname.indexOf(" ") != -1) {
-      //   notification.warning({
-      //     message: "电视墙名称不能出现空格，请重试",
-      //     duration: 1,
-      //   });
-      //   return;
-      // }
+      if(!namecheck.NameChecked(this.addwallname,spacewarn)){
+        return;
+      }
       if (len > 32) {
         notification.warning({
           message: "电视墙名称最长16个中文字符（32个英文字符），请重试",
@@ -1089,7 +1069,6 @@ export default {
             }
           }
           that.nameMsg = nameMsg;
-          console.log(nameMsg);
           that.outVCon = [];
           for (let i = 0; i < deviceInfo.length; i++) {
             if (deviceInfo[i].baseinfo.type == 1) {
@@ -1222,13 +1201,9 @@ export default {
         });
         return;
       }
-      // if (this.wallname.indexOf(" ") != -1) {
-      //   notification.warning({
-      //     message: "电视墙名称不能出现空格，请重试",
-      //     duration: 1,
-      //   });
-      //   return;
-      // }
+      if(!namecheck.NameChecked(this.wallname,spacewarn)){
+        return;
+      }
       let that = this;
       for (let i = 0; i < that.layoutMsg.length; i++) {
         that.layoutMsg[i].Output.width = parseInt(
@@ -1431,13 +1406,9 @@ export default {
                 len++;
               }
             }
-            // if (that.wallname.indexOf(" ") != -1) {
-            //   notification.warning({
-            //     message: "电视墙名称不能出现空格，请重试",
-            //     duration: 1,
-            //   });
-            //   return;
-            // }
+            if(!namecheck.NameChecked(that.wallname,spacewarn)){
+              return;
+            }
             if (len > 32) {
               notification.warning({
                 message: "电视墙名称最长16个中文字符（32个英文字符），请重试",

@@ -1,19 +1,16 @@
-import notification  from "ant-design-vue";
-function NameChecked(value){
-    console.log("jifukui to this")
+import {  message, notification } from "ant-design-vue";
+function NameChecked(value,info){
     let flag = false
     if(typeof value === "string"){
-          flag = value.match(/\s/g).length===value.length
+          flag = !(value.match(/\s/g).length===value.length);
     }
     if(!flag){
         notification.warning({
-            message: "名称设置错误，请重试",
+            message: info,
             duration: 1,
         });
     }
     return flag;
 }
 
-export {
-    NameChecked
-}
+export  {NameChecked}
