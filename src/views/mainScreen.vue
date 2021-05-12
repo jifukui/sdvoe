@@ -74,7 +74,9 @@
   </div>
 </template>
 <script>
+const spacewarn = "场景名称不能全是空格，请重试";
 import { Modal, notification } from "ant-design-vue";
+import * as namecheck from "../js/namespace";
 export default {
   name: "MainScreen",
   components: {},
@@ -113,11 +115,7 @@ export default {
         });
         return;
       }
-      if (this.addscenename.indexOf(" ") != -1) {
-        notification.warning({
-          message: "场景名称不能出现空格，请重试",
-          duration: 1,
-        });
+      if (!namecheck.NameChecked(that.wallname, spacewarn)) {
         return;
       }
       if ("AUDIO_" + this.addscenename != this.$store.state.groupMsg.name) {

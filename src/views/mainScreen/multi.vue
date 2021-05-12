@@ -978,9 +978,11 @@
 </template>
 
 <script>
+const spacewarn = "多画面名称不能全是空格，请重试";
 import viewCon from "../../components/viewContent";
 import { Modal, notification } from "ant-design-vue";
 import { equalsObj, setLayout } from "../../js/layout";
+import * as namecheck from "../../js/namespace";
 export default {
   name: "Wall",
   components: {
@@ -1246,10 +1248,10 @@ export default {
         let outputfps = this.fblselect.split("@")[1].split("Hz")[0];
         let width = Math.floor(outputwidth / multinum[1]);
         let height = Math.floor(outputheight / multinum[0]);
-        width = (width%2)?width-1:width;
-        height = (height%2)?height-1:height;
-        let suwidth = (width%32)?width-(width%32)+32:width
-        let suheight = (height%32)?height-(height%32):height
+        width = width % 2 ? width - 1 : width;
+        height = height % 2 ? height - 1 : height;
+        let suwidth = width % 32 ? width - (width % 32) + 32 : width;
+        let suheight = height % 32 ? height - (height % 32) : height;
         let num = multinum[0] * multinum[1];
         for (let i = 0; i < multinum[0]; i++) {
           for (let j = 0; j < multinum[1]; j++) {
@@ -1261,8 +1263,8 @@ export default {
               origin: "",
               surface_top: i * suheight,
               surface_left: j * suwidth,
-              surface_width:suwidth,
-              surface_height:suheight
+              surface_width: suwidth,
+              surface_height: suheight,
             };
             this.layoutMsg.push(JSON.parse(JSON.stringify(layoutone)));
             this.nameMsg.push(JSON.parse(JSON.stringify(layoutone)));
@@ -1897,11 +1899,7 @@ export default {
           len++;
         }
       }
-      if (this.addmultiname.indexOf(" ") != -1) {
-        notification.warning({
-          message: "多画面名称不能出现空格，请重试",
-          duration: 1,
-        });
+      if (!namecheck.NameChecked(that.wallname, spacewarn)) {
         return;
       }
       if (len > 32) {
@@ -2134,11 +2132,7 @@ export default {
           len++;
         }
       }
-      if (this.multiName.indexOf(" ") != -1) {
-        notification.warning({
-          message: "多画面名称不能出现空格，请重试",
-          duration: 1,
-        });
+      if (!namecheck.NameChecked(that.wallname, spacewarn)) {
         return;
       }
       if (len > 32) {
@@ -2312,11 +2306,7 @@ export default {
                 len++;
               }
             }
-            if (that.multiName.indexOf(" ") != -1) {
-              notification.warning({
-                message: "多画面名称不能出现空格，请重试",
-                duration: 1,
-              });
+            if (!namecheck.NameChecked(that.wallname, spacewarn)) {
               return;
             }
             if (len > 32) {
@@ -2574,11 +2564,7 @@ export default {
                   len++;
                 }
               }
-              if (that.multiName.indexOf(" ") != -1) {
-                notification.warning({
-                  message: "多画面名称不能出现空格，请重试",
-                  duration: 1,
-                });
+              if (!namecheck.NameChecked(that.wallname, spacewarn)) {
                 return;
               }
               if (len > 32) {

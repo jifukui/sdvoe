@@ -130,8 +130,10 @@
 </template>
 
 <script>
+const spacewarn = "组名称不能全是空格，请重试";
 import viewCon from "../../../components/viewContent";
 import { Modal, notification } from "ant-design-vue";
+import * as namecheck from "../../../js/namespace";
 export default {
   name: "PtoPV",
   components: {
@@ -224,7 +226,6 @@ export default {
       for (let i = 0; i < arr1.length; i++) {
         arr3.push(arr1[i].id + arr1[i].type);
       }
-      console.log(arr2, arr3);
       let aodata = {
         command: {
           type: "set",
@@ -258,11 +259,7 @@ export default {
               });
               return;
             }
-            if (that.groupname.indexOf(" ") != -1) {
-              notification.warning({
-                message: "组名不能出现空格，请重试",
-                duration: 1,
-              });
+            if (!namecheck.NameChecked(that.wallname, spacewarn)) {
               return;
             }
             if ("AUDIO_" + that.groupname != that.$store.state.groupMsg.name) {
@@ -375,7 +372,10 @@ export default {
                 that.ptopin++;
                 // that.inACon.push(deviceInfo[i]);
                 // that.encoderarr.push(deviceInfo[i]);
-                let digitalaudio = deviceInfo[i].HDMI[0].streams[deviceInfo[i].HDMI[0].streams.length-1].config;
+                let digitalaudio =
+                  deviceInfo[i].HDMI[0].streams[
+                    deviceInfo[i].HDMI[0].streams.length - 1
+                  ].config;
                 digitalaudio.id = deviceInfo[i].baseinfo.id;
                 digitalaudio.type = "digitalinA";
                 digitalaudio.videoname = deviceInfo[i].baseinfo.alias;
@@ -437,13 +437,15 @@ export default {
                         name =
                           deviceInfo[j].baseinfo.alias +
                           "-" +
-                          deviceInfo[
-                            j
-                          ].HDMI[0].streams[deviceInfo[j].HDMI[0].streams.length-1].config.alias.substring(
-                            deviceInfo[
-                              j
-                            ].HDMI[0].streams[deviceInfo[j].HDMI[0].streams.length-1].config.alias.indexOf("-") + 1,
-                            deviceInfo[j].HDMI[0].streams[deviceInfo[j].HDMI[0].streams.length-1].config.alias.length
+                          deviceInfo[j].HDMI[0].streams[
+                            deviceInfo[j].HDMI[0].streams.length - 1
+                          ].config.alias.substring(
+                            deviceInfo[j].HDMI[0].streams[
+                              deviceInfo[j].HDMI[0].streams.length - 1
+                            ].config.alias.indexOf("-") + 1,
+                            deviceInfo[j].HDMI[0].streams[
+                              deviceInfo[j].HDMI[0].streams.length - 1
+                            ].config.alias.length
                           );
                       }
                       digitalaudio.contentname = name;
@@ -477,13 +479,15 @@ export default {
                         name =
                           deviceInfo[j].baseinfo.alias +
                           "-" +
-                          deviceInfo[
-                            j
-                          ].HDMI[0].streams[deviceInfo[j].HDMI[0].streams.length-1].config.alias.substring(
-                            deviceInfo[
-                              j
-                            ].HDMI[0].streams[deviceInfo[j].HDMI[0].streams.length-1].config.alias.indexOf("-") + 1,
-                            deviceInfo[j].HDMI[0].streams[deviceInfo[j].HDMI[0].streams.length-1].config.alias.length
+                          deviceInfo[j].HDMI[0].streams[
+                            deviceInfo[j].HDMI[0].streams.length - 1
+                          ].config.alias.substring(
+                            deviceInfo[j].HDMI[0].streams[
+                              deviceInfo[j].HDMI[0].streams.length - 1
+                            ].config.alias.indexOf("-") + 1,
+                            deviceInfo[j].HDMI[0].streams[
+                              deviceInfo[j].HDMI[0].streams.length - 1
+                            ].config.alias.length
                           );
                       }
                       analogaudio.contentname = name;
@@ -514,7 +518,7 @@ export default {
       });
     },
     addGroup() {
-      this.addgroupname == ""
+      this.addgroupname == "";
       this.groupvalue = true;
       this.groupcheck = [];
       console.log(this.decoderarr);
@@ -547,11 +551,7 @@ export default {
         });
         return;
       }
-      if (this.addgroupname.indexOf(" ") != -1) {
-        notification.warning({
-          message: "组名不能出现空格，请重试",
-          duration: 1,
-        });
+      if (!namecheck.NameChecked(that.wallname, spacewarn)) {
         return;
       }
       let group = this.$store.state.deviceInfo.group;
@@ -855,11 +855,7 @@ export default {
               });
               return;
             }
-            if (that.groupname.indexOf(" ") != -1) {
-              notification.warning({
-                message: "组名不能出现空格，请重试",
-                duration: 1,
-              });
+            if (!namecheck.NameChecked(that.wallname, spacewarn)) {
               return;
             }
             if ("AUDIO_" + that.groupname != that.$store.state.groupMsg.name) {

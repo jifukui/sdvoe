@@ -154,11 +154,7 @@
                   </li>
                 </ul>
                 <div class="btn_bigsquare coderbtn1" @click="handupDevice()">
-                  {{
-                    decoderInfo.baseinfo.HandUp
-                      ? "停止闪烁"
-                      : "设备呼叫"
-                  }}
+                  {{ decoderInfo.baseinfo.HandUp ? "停止闪烁" : "设备呼叫" }}
                 </div>
                 <div class="btn_bigsquare coderbtn2" @click="savePage1()">
                   保存
@@ -961,42 +957,66 @@ export default {
           });
           return;
         }
-        if(!checkInp.fnipmaskgateway(this.ipaddr,this.maskaddr,this.gatewayaddr)){
+        if (
+          !checkInp.fnipmaskgateway(
+            this.ipaddr,
+            this.maskaddr,
+            this.gatewayaddr
+          )
+        ) {
           notification.warning({
             message: "IP地址、子网掩码、默认网关不匹配",
             duration: 1,
           });
           return;
         }
-        let aodata = {
-          command: {
-            type: "set",
-            command: "DeviceNetwork",
-            device_mode: "SDVOE",
-            data: {
-              device: this.$store.state.coderID,
-              ip_address: this.ipaddr,
-              submask: this.maskaddr,
-              gateway: this.gatewayaddr,
-              DHCP: setstate,
-            },
-          },
-        };
         let that = this;
-        this.$axios.post("api/device/sdvoe", aodata).then(function (res) {
-          if (res.data.status == "SUCCESS") {
-            notification.success({
-              message: "修改网络参数成功",
-              duration: 1,
-            });
-            that.getdevice();
-          } else {
-            notification.error({
-              message: "修改网络参数失败",
-              duration: 1,
-            });
-          }
-        });
+        checkInp
+          .Compare2Network(
+            this.ipaddr,
+            this.maskaddr,
+            this.decoderInfo.network.ip_address,
+            this.decoderInfo.network.submask,
+            setstate
+          )
+          .then(
+            (res) => {
+              let aodata = {
+                command: {
+                  type: "set",
+                  command: "DeviceNetwork",
+                  device_mode: "SDVOE",
+                  data: {
+                    device: this.$store.state.coderID,
+                    ip_address: this.ipaddr,
+                    submask: this.maskaddr,
+                    gateway: this.gatewayaddr,
+                    DHCP: setstate,
+                  },
+                },
+              };
+              that.$axios.post("api/device/sdvoe", aodata).then(function (res) {
+                if (res.data.status == "SUCCESS") {
+                  notification.success({
+                    message: "修改网络参数成功",
+                    duration: 1,
+                  });
+                  that.getdevice();
+                } else {
+                  notification.error({
+                    message: "修改网络参数失败",
+                    duration: 1,
+                  });
+                }
+              });
+            },
+            (rej) => {
+              that.ipaddr = that.decoderInfo.network.ip_address;
+              that.maskaddr = that.decoderInfo.network.submask;
+              that.gatewayaddr = that.decoderInfo.network.gateway;
+              that.ipselect = that.selectarr[+!Sgetstate].value;
+            }
+          );
       } else {
         notification.warning({
           message: "请输入新的网络参数",

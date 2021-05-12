@@ -129,8 +129,10 @@
 </template>
 
 <script>
+const spacewarn = "组名称不能全是空格，请重试";
 import viewCon from "../../../components/viewContent";
 import { Modal, notification } from "ant-design-vue";
+import * as namecheck from "../../../js/namespace";
 export default {
   name: "PtoPV",
   components: {
@@ -159,9 +161,7 @@ export default {
       offlinede: [],
     };
   },
-  watch: {
-    
-  },
+  watch: {},
   computed: {},
   methods: {
     deloffde(id) {
@@ -219,11 +219,7 @@ export default {
               });
               return;
             }
-            if (that.groupname.indexOf(" ") != -1) {
-              notification.warning({
-                message: "组名不能出现空格，请重试",
-                duration: 1,
-              });
+            if (!namecheck.NameChecked(that.wallname, spacewarn)) {
               return;
             }
             if ("VIDEO_" + that.groupname != that.$store.state.groupMsg.name) {
@@ -358,7 +354,7 @@ export default {
           command: "deviceinfo",
         },
       };
-      
+
       this.$axios.post("api/device/sdvoe", aodata).then(function (res) {
         if (res.data.status == "SUCCESS") {
           that.$store.state.deviceInfo = res.data.result.data;
@@ -528,11 +524,7 @@ export default {
         });
         return;
       }
-      if (this.addgroupname.indexOf(" ") != -1) {
-        notification.warning({
-          message: "组名不能出现空格，请重试",
-          duration: 1,
-        });
+      if (!namecheck.NameChecked(that.wallname, spacewarn)) {
         return;
       }
       let group = this.$store.state.deviceInfo.group;
@@ -789,11 +781,7 @@ export default {
               });
               return;
             }
-            if (that.groupname.indexOf(" ") != -1) {
-              notification.warning({
-                message: "组名不能出现空格，请重试",
-                duration: 1,
-              });
+            if (!namecheck.NameChecked(that.wallname, spacewarn)) {
               return;
             }
             if ("VIDEO_" + that.groupname != that.$store.state.groupMsg.name) {

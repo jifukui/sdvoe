@@ -1,6 +1,5 @@
-var checkInp = {
-
-};
+import { Modal } from "ant-design-vue";
+var checkInp = {};
 
 checkInp.fnValidateIPAddress = function (ipInput) {
     let ipaddr = ipInput;
@@ -16,12 +15,10 @@ checkInp.fnValidateIPAddress = function (ipInput) {
         parts[3] = parseInt(parseFloat(parts[3]));
         if (!zeroAllow) {
             if (parts[0] < 0 || parts[0] > 223 || parts[0] == 127) {
-                console.log("第一字节是用非法的数据");
                 return false;
             }
             for (var i = 1; i < parts.length; i++) {
                 if (parts[i] > 255) {
-                    console.log("数据超出范围");
                     return false;
                 }
             }
@@ -29,20 +26,17 @@ checkInp.fnValidateIPAddress = function (ipInput) {
                 (parts[1] | parts[2] | parts[3]) == 0 ||
                 (parts[1] & parts[2] & parts[3]) == 255
             ) {
-                console.log("使用的全1全0");
                 return false;
             } else {
                 return true;
             }
         }
     } else {
-        console.log("不合法的数据");
         return false;
     }
 }
 checkInp.fnValidateMask = function (MaskInput) {
     let subnetMask = MaskInput;
-    console.log(subnetMask);
     subnetMask = subnetMask.replace(/\s/g, "");
     var re = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
     if (re.test(subnetMask)) {
@@ -55,7 +49,6 @@ checkInp.fnValidateMask = function (MaskInput) {
         parts[3] = parseInt(parseFloat(parts[3]));
         for (var i = 0; i < 4; i++) {
             if (parts[i] > 255) {
-                console.log("超出范围");
                 return false;
             }
         }
@@ -70,15 +63,12 @@ checkInp.fnValidateMask = function (MaskInput) {
         var reg = /1+/g;
         var str = mask.match(reg);
         if (str == null) {
-            console.log("權威0");
             return false;
         }
         if (str.length > 1 || mask.indexOf("1") != 0) {
-            console.log("0,1交叉或者是1开始的位置不为0");
             return false;
         } else {
             if (str[0].length > 30 || str[0].length < 3) {
-                console.log("子网掩码的1数据量不对");
                 return false;
             } else {
                 return true;
@@ -101,12 +91,10 @@ checkInp.fnValidateGateway = function (gateWayInp) {
         parts[3] = parseInt(parseFloat(parts[3]));
         if (!zeroAllow) {
             if (parts[0] < 0 || parts[0] > 223 || parts[0] == 127) {
-                console.log("第一字节是用非法的数据");
                 return false;
             }
             for (var i = 1; i < parts.length; i++) {
                 if (parts[i] > 255) {
-                    console.log("数据超出范围");
                     return false;
                 }
             }
@@ -114,14 +102,12 @@ checkInp.fnValidateGateway = function (gateWayInp) {
                 (parts[1] | parts[2] | parts[3]) == 0 ||
                 (parts[1] & parts[2] & parts[3]) == 255
             ) {
-                console.log("使用的全1全0");
                 return false;
             } else {
                 return true;
             }
         }
     } else {
-        console.log("不合法的数据");
         return false;
     }
 }
@@ -159,8 +145,7 @@ checkInp.ipToNumber = function (ip) {
     num += parseInt(aNum[1]) << 16;
     num += parseInt(aNum[2]) << 8;
     num += parseInt(aNum[3]);
-    num = num >>> 0; //这个很关键，不然可能会出现负数的情况
-    console.log(num);
+    num = num >>> 0;
     return num;
 }
 //判断ip是否为同一网段
@@ -169,10 +154,8 @@ checkInp.isEqualIPAddress = function (addr1, addr2, mask, mask1) {
         (checkInp.ipToNumber(addr1) & checkInp.ipToNumber(mask)) ==
         (checkInp.ipToNumber(addr2) & checkInp.ipToNumber(mask1))
     ) {
-        console.log("在同一个网段");
         return true;
     } else {
-        console.log("不在同一个网段");
         return false;
     }
 }
@@ -183,17 +166,53 @@ checkInp.fnipmaskgateway = function (ip, mask, gateway) {
     for (let i = 0; i < 4; i++) {
         let a = iparr[i] & maskarr[i];
         let b = gatearr[i] & maskarr[i];
-        console.log("11111", i, iparr[i], maskarr[i], gatearr[i], a, b)
         if (a != b) {
-            console.log("ip&mask != gateway&mask")
             return false;
         } else {
-            console.log("ip&mask == gateway&mask")
         }
     }
     return true;
 }
+checkInp.Compare2Network = async function (ip1, mask1, ip2, mask2, dhcp) {
+    let flag = false;
+    let obj1 = {};
+    let data = {
+        res: function () {
+            obj1.res();
+        },
+        rej: function () {
+            obj1.rej();
+        }
+    }
+    let obj = new Promise(function (res, rej) {
+        obj1.res = res;
+        obj1.rej = rej;
+    });
+    if (!dhcp) {
+        ip1 = checkInp.ipToNumber(ip1)
+        ip2 = checkInp.ipToNumber(ip2)
+        mask1 = checkInp.ipToNumber(mask1)
+        mask2 = checkInp.ipToNumber(mask2)
+        flag = ((ip1 & mask1) === (ip2 & mask2))
+    }
+    if (!flag) {
+        Modal.confirm({
+            title: "提示",
+            content: "设置的网络参数与当前网络参数不在同一个网络中\
+            设置将会造成设备失联",
+            okText: "继续",
+            cancelText: "取消",
+            onOk: data.res,
+            onCancel: data.rej
+        })
+    } else {
+        if (!dhcp) {
+            obj1.res();
+        }
+    }
 
+    return obj;
+}
 export {
     checkInp
 };

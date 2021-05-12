@@ -68,22 +68,18 @@
                   <div class="edidmodel">{{ edidmodel }}</div>
                 </span>
               </div>
-              <p v-show="toArr.length != 0">从</p>
-              <p style="font-size: 14px; line-height: 16px">{{ fromname }}</p>
-              <p v-show="toArr.length != 0">拷贝到</p>
-              <p
-                v-for="(item, index) in tonamearr"
-                :key="index"
-                style="font-size: 14px; line-height: 16px"
-              >
-                {{ ellipconname(item) }}
-              </p>
-              <div
-                class="copybtn"
-                v-show="toArr.length != 0"
-                @click="edidCopy()"
-              >
-                拷贝
+              <div v-show="!edidread && toArr.length != 0">
+                <p>从</p>
+                <p style="font-size: 14px; line-height: 16px">{{ fromname }}</p>
+                <p>拷贝到</p>
+                <p
+                  v-for="(item, index) in tonamearr"
+                  :key="index"
+                  style="font-size: 14px; line-height: 16px"
+                >
+                  {{ ellipconname(item) }}
+                </p>
+                <div class="copybtn" @click="edidCopy()">拷贝</div>
               </div>
             </div>
             <div class="edid_r">
@@ -153,7 +149,6 @@ export default {
         let len = value.length;
         if (!value) return "";
         if (len > 10) {
-          // return value.substring(0, 3) + "..." + value.substring(len - 10, len);
           return value.substring(0, 3) + ".." + value.substring(len - 3, len);
         }
         return value;
@@ -363,20 +358,16 @@ export default {
       if (this.toArr.indexOf(id) == -1) {
         this.toArr.push(id);
         this.tonamearr.push(name);
-        console.log(this.toArr.length, this.indata.length);
         if (this.toArr.length == this.indata.length) {
           this.allcheck = true;
         }
       } else {
         this.toArr.splice(this.toArr.indexOf(id), 1);
         this.tonamearr.splice(this.tonamearr.indexOf(name), 1);
-        console.log(this.toArr.length, this.indata.length);
         if (this.toArr.length != this.indata.length) {
-          console.log("budeng");
           this.allcheck = false;
         }
       }
-      console.log(this.toArr);
     },
     checkAll() {
       if (this.allcheck) {
@@ -439,8 +430,6 @@ export default {
           console.log("the res is ");
           console.dir(res);
           if (res.status == 200) {
-            // console.log(res.data.result.data)
-            // const blob = new Blob([res.data.result.data.data.data],{type:"application/octet-stream;charset=ascii"});
             const downloadElement = document.createElement("a");
             const href = window.URL.createObjectURL(res.data);
             let contentDisposition = res.headers["content-disposition"];
