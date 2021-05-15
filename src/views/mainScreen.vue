@@ -115,7 +115,7 @@ export default {
         });
         return;
       }
-      if (!namecheck.NameChecked(that.wallname, spacewarn)) {
+      if (!namecheck.NameChecked(this.addscenename, spacewarn)) {
         return;
       }
       if ("AUDIO_" + this.addscenename != this.$store.state.groupMsg.name) {

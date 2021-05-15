@@ -135,25 +135,23 @@ export default {
       indexarr: [],
       devicearr: [],
       addtimer: "",
-      addnumber: 0
+      addnumber: 0,
     };
   },
-  computed: {
-    
-  },
+  computed: {},
   watch: {
-    enInfo:{
-      handler(value){
-        if(value.length){
-          this.checkall = value.every(info=>{
-            return info.checked
-          })
-        }else{
+    enInfo: {
+      handler(value) {
+        if (value.length) {
+          this.checkall = value.every((info) => {
+            return info.checked;
+          });
+        } else {
           this.checkall = false;
         }
       },
-      deep:true
-    }
+      deep: true,
+    },
   },
   methods: {
     ellipconname(value) {
@@ -297,7 +295,7 @@ export default {
               cknum++;
             }
           }
-          if (that.enInfo.length&&cknum == that.enInfo.length) {
+          if (that.enInfo.length && cknum == that.enInfo.length) {
             // that.checkall = true;
           }
         } else {
@@ -332,7 +330,10 @@ export default {
             num++;
           }
         }
-        if (this.$store.state.deviceInfo.device.length&&num == this.$store.state.deviceInfo.device.length) {
+        if (
+          this.$store.state.deviceInfo.device.length &&
+          num == this.$store.state.deviceInfo.device.length
+        ) {
           // this.checkall = true;
         }
       } else {
@@ -353,7 +354,6 @@ export default {
       if (num == this.$store.state.deviceInfo.device.length) {
         checkarr = [];
       }
-      console.log(checkarr);
       let aodata = {
         command: {
           type: "set",
@@ -534,13 +534,14 @@ export default {
           okText: "确定",
           cancelText: "取消",
           onOk() {
+            that.$store.state.Jmask = true;
             that.$axios.post("api/device/sdvoe", aodata).then(function (res) {
               if (res.data.status == "SUCCESS") {
                 clearInterval(that.timer);
                 setTimeout(() => {
                   that.getprocess(index, "one", true);
                 }, 1500);
-                clearInterval(that.upgradetimer)
+                clearInterval(that.upgradetimer);
                 that.upgradetimer = setInterval(function () {
                   that.getprocess(index, "one", false);
                 }, 5000);
@@ -563,7 +564,6 @@ export default {
       }
     },
     sss() {
-      console.log(this.upgradetimer);
       let aodata = {
         command: {
           type: "get",
@@ -572,10 +572,8 @@ export default {
           data: {},
         },
       };
-      let that = this;
       this.$axios.post("api/device/sdvoe", aodata).then(function (res) {
         if (res.data.status == "SUCCESS") {
-          console.log(res.data.result.data);
         }
       });
     },
@@ -590,7 +588,6 @@ export default {
       } else if (type == "all" && state) {
         this.devicearr = this.devicearr.concat(index);
       }
-      console.log("indexarr", this.indexarr);
       let aodata = {
         command: {
           type: "get",
@@ -614,7 +611,6 @@ export default {
               num++;
             }
           }
-          console.log(arr, num, that.devicearr);
           if (num == arr.length) {
             let uparr = [];
             for (let i = 0; i < that.devicearr.length; i++) {
@@ -649,6 +645,7 @@ export default {
                 });
               }
             });
+            that.$store.state.Jmask = false;
             that.$store.state.upgradePage = true;
             setTimeout(() => {
               notification.success({
@@ -659,14 +656,12 @@ export default {
             }, 20000);
             that.indexarr = [];
             that.devicearr = [];
-            console.log("执行");
-            clearInterval(that.upgradetimer)
+            clearInterval(that.upgradetimer);
             that.getdevice();
             that.timer = setInterval(function () {
               that.getdevice();
             }, 5000);
           }
-          console.log();
         } else {
           notification.error({
             message: "升级失败",
@@ -691,6 +686,7 @@ export default {
         checkarr = [];
       }
       if (num != 0 && this.upgradeselect != "不升级") {
+        this.$store.state.Jmask = true;
         let aodata = {
           command: {
             type: "set",
@@ -709,7 +705,7 @@ export default {
             setTimeout(() => {
               that.getprocess(uparr, "all", true);
             }, 1500);
-            clearInterval(that.upgradetimer)
+            clearInterval(that.upgradetimer);
             that.upgradetimer = setInterval(function () {
               that.getprocess(uparr, "all", false);
             }, 5000);

@@ -1078,9 +1078,16 @@ export default {
       showoutV: [],
       showinV: [],
       offlinede: [],
+      modeselected: 0,
     };
   },
-  watch: {},
+  watch: {
+    modeselected: {
+      handler(value) {
+        console.log(`the modeselected value have change to ${value}`);
+      },
+    },
+  },
   computed: {},
   methods: {
     deloffde(id) {
@@ -1210,6 +1217,7 @@ export default {
       return true;
     },
     createMulti(row, column, state) {
+      this.modeselected = 0;
       let boxnum = row * column;
       if (row == 0 || column == 0) {
         notification.warning({
@@ -1229,6 +1237,8 @@ export default {
       for (let i = 0; i < boxnum; i++) {
         this.multiBox[i] = i + 1;
       }
+      this.row = row;
+      this.column = column;
       this.boxwidth = Math.floor(390 / column);
       this.boxheight = Math.floor(240 / row);
       this.writeViewBox = false;
@@ -1238,41 +1248,16 @@ export default {
       this.multinum = [row, column];
       this.multimodify = true;
       if (state) {
-        // console.log("执行改变");
         let multinum = this.multinum;
         this.layoutMsg = [];
         this.nameMsg = [];
-        // this.fblselect = "3840×2160@60Hz";
         let outputwidth = this.fblselect.split("×")[0];
         let outputheight = this.fblselect.split("×")[1].split("@")[0];
         let outputfps = this.fblselect.split("@")[1].split("Hz")[0];
         let width = Math.floor(outputwidth / multinum[1]);
         let height = Math.floor(outputheight / multinum[0]);
-        width = width % 2 ? width - 1 : width;
-        height = height % 2 ? height - 1 : height;
-        let suwidth = width % 32 ? width - (width % 32) + 32 : width;
-        let suheight = height % 32 ? height - (height % 32) : height;
-        let num = multinum[0] * multinum[1];
-        for (let i = 0; i < multinum[0]; i++) {
-          for (let j = 0; j < multinum[1]; j++) {
-            let layoutone = {
-              top: i * height,
-              left: j * width,
-              width: width,
-              height: height,
-              origin: "",
-              surface_top: i * suheight,
-              surface_left: j * suwidth,
-              surface_width: suwidth,
-              surface_height: suheight,
-            };
-            this.layoutMsg.push(JSON.parse(JSON.stringify(layoutone)));
-            this.nameMsg.push(JSON.parse(JSON.stringify(layoutone)));
-          }
-        }
-        for (let i = 0; i < this.layoutMsg.length; i++) {
-          this.layoutMsg[i]["z-index"] = i;
-        }
+        this.layoutMsg = this.SetLaout(multinum[0], multinum[1], width, height);
+        this.nameMsg = this.SetLaout(multinum[0], multinum[1], width, height);
         this.showoutV = JSON.parse(JSON.stringify(this.inVCon));
         this.showinV = [];
         for (let j = 0; j < this.inVCon.length; j++) {
@@ -1292,6 +1277,31 @@ export default {
         }
       }
     },
+    SetLaout(row, col, width, height) {
+      let arr = [];
+      width = width % 2 ? width - 1 : width;
+      height = height % 2 ? height - 1 : height;
+      let suwidth = width % 32 ? width - (width % 32) + 32 : width;
+      let suheight = height % 32 ? height - (height % 32) + 32 : height;
+      for (let i = 0; i < row; i++) {
+        for (let j = 0; j < col; j++) {
+          let layoutone = {
+            top: i * height,
+            left: j * width,
+            width: width,
+            height: height,
+            origin: "",
+            surface_top: i * suheight,
+            surface_left: j * suwidth,
+            surface_width: suwidth,
+            surface_height: suheight,
+            "z-index": i * col + j,
+          };
+          arr.push(layoutone);
+        }
+      }
+      return arr;
+    },
     writeMulti() {
       this.writeViewBox = true;
       this.row = "";
@@ -1301,13 +1311,12 @@ export default {
       this.writeViewBox = false;
     },
     createMultiLeft(value, state) {
+      this.modeselected = value;
       this.leftIndex = value;
       this.multinum = [value, "n"];
       this.multimodify = true;
       if (state) {
-        console.log("执行改变");
         let multinum = this.multinum;
-        this.fblselect = "3840×2160@60Hz";
         let outputwidth = this.fblselect.split("×")[0];
         let outputheight = this.fblselect.split("×")[1].split("@")[0];
         let outputfps = this.fblselect.split("@")[1].split("Hz")[0];
@@ -1335,59 +1344,24 @@ export default {
       }
     },
     changefbl() {
-      // console.log(this.fblselect, this.multinum);
-      let multinum = JSON.parse(JSON.stringify(this.multinum));
-      let width = parseInt(this.fblselect.split("×")[0]);
-      let height = parseInt(this.fblselect.split("×")[1].split("@")[0]);
-      if (
-        this.layoutMsg.length == 8 &&
-        this.layoutMsg[7].width != this.layoutMsg[0].width
-      ) {
-        let width2 = this.layoutMsg[0].width * 4;
-        let height2 = this.layoutMsg[0].height * 4;
+      let res = this.fblselect.match(/(\d+)×(\d+)@(\d+)/);
+      if (res) {
+        let arr;
+        let width = parseInt(res[1]);
+        let height = parseInt(res[2]);
+        if (this.modeselected) {
+          width /= 4;
+          height /= 4;
+          arr = setLayout(this.modeselected, width, height);
+        } else {
+          arr = this.SetLaout(this.row, this.column, width, height);
+        }
         for (let i = 0; i < this.layoutMsg.length; i++) {
-          if (i < 7) {
-            this.layoutMsg[i].width = width / 4;
-            this.layoutMsg[i].height = height / 4;
-            if (this.layoutMsg[i].left != 0) {
-              this.layoutMsg[i].left =
-                (this.layoutMsg[i].left * width) / width2;
-            }
-            if (this.layoutMsg[i].top != 0) {
-              this.layoutMsg[i].top =
-                (this.layoutMsg[i].top * height) / height2;
-            }
-          } else {
-            this.layoutMsg[i].width = (width / 4) * 3;
-            this.layoutMsg[i].height = (height / 4) * 3;
-            if (this.layoutMsg[i].left != 0) {
-              this.layoutMsg[i].left =
-                (this.layoutMsg[i].left * width) / width2;
-            }
-            if (this.layoutMsg[i].top != 0) {
-              this.layoutMsg[i].top =
-                (this.layoutMsg[i].top * height) / height2;
-            }
+          if (this.layoutMsg[i].origin) {
+            arr[i].origin = this.layoutMsg[i].origin;
           }
         }
-      } else {
-        let width2 = this.layoutMsg[0].width * multinum[1];
-        let height2 = this.layoutMsg[0].height * multinum[0];
-        // console.log(width2, height2, width, height);
-        for (let i = 0; i < this.layoutMsg.length; i++) {
-          this.layoutMsg[i].width = width / multinum[1];
-          this.layoutMsg[i].height = height / multinum[0];
-          if (this.layoutMsg[i].left != 0) {
-            this.layoutMsg[i].left = Math.floor(
-              (this.layoutMsg[i].left * width) / width2
-            );
-          }
-          if (this.layoutMsg[i].top != 0) {
-            this.layoutMsg[i].top = Math.floor(
-              (this.layoutMsg[i].top * height) / height2
-            );
-          }
-        }
+        this.layoutMsg = arr;
       }
     },
     dropOverOne(ev, index) {
@@ -1587,7 +1561,6 @@ export default {
                 that.decoderarr.push(deviceInfo[i]);
               }
             }
-            console.log("000", that.outVCon);
             let groupInfo = that.$store.state.deviceInfo.group;
             for (let i = 0; i < groupInfo.length; i++) {
               if (groupInfo[i].type == "video") {
@@ -1690,7 +1663,6 @@ export default {
           grouparr.push(that.groupcheck[i].id);
         }
       }
-      console.log(grouparr);
       let aodata = {
         command: {
           type: "set",
@@ -1705,7 +1677,6 @@ export default {
           },
         },
       };
-      console.log(aodata);
       this.$axios.post("api/device/sdvoe", aodata).then(function (res) {
         if (res.data.status == "SUCCESS") {
           notification.success({
@@ -1743,7 +1714,6 @@ export default {
           this.offlinede.push(de);
         }
       }
-      console.log(arr, this.offlinede);
       this.groupname = data[2].slice(6);
     },
     dropOverGroupV1(ev) {
@@ -1816,7 +1786,6 @@ export default {
           }
         }
       }
-      console.log(arr1, arr2);
       this.outVConG1 = arr1;
       this.outVConG2 = arr2;
     },
@@ -1832,7 +1801,6 @@ export default {
           },
         },
       };
-      console.log(aodata);
       Modal.confirm({
         title: "是否删除组-" + data.slice(6) + "?",
         okText: "确定",
@@ -1899,7 +1867,7 @@ export default {
           len++;
         }
       }
-      if (!namecheck.NameChecked(that.wallname, spacewarn)) {
+      if (!namecheck.NameChecked(this.addmultiname, spacewarn)) {
         return;
       }
       if (len > 32) {
@@ -1934,6 +1902,10 @@ export default {
                 height: 1080,
                 "z-index": 0,
                 origin: "",
+                surface_top: 0,
+                surface_left: 0,
+                surface_width: 1920,
+                surface_height: 1080,
               },
               {
                 top: 0,
@@ -1942,6 +1914,10 @@ export default {
                 height: 1080,
                 "z-index": 1,
                 origin: "",
+                surface_top: 0,
+                surface_left: 1920,
+                surface_width: 1920,
+                surface_height: 1080,
               },
               {
                 top: 1080,
@@ -1950,6 +1926,10 @@ export default {
                 height: 1080,
                 "z-index": 2,
                 origin: "",
+                surface_top: 1080,
+                surface_left: 0,
+                surface_width: 1920,
+                surface_height: 1080,
               },
               {
                 top: 1080,
@@ -1958,6 +1938,10 @@ export default {
                 height: 1080,
                 "z-index": 3,
                 origin: "",
+                surface_top: 1080,
+                surface_left: 1920,
+                surface_width: 1920,
+                surface_height: 1080,
               },
             ],
           },
@@ -1981,7 +1965,6 @@ export default {
       });
     },
     openMulti(data) {
-      console.log("打开多画面");
       let that = this;
       that.yulanshow = false;
       let aodata = {
@@ -1998,7 +1981,6 @@ export default {
         if (res.data.status == "SUCCESS") {
           that.$store.state.multiConPage = true;
           that.multiConget = JSON.parse(JSON.stringify(res.data.result.data));
-          console.log(that.multiConget);
           that.multiName = res.data.result.data.name;
           that.layoutMsg = res.data.result.data.layout;
           that.fblselect =
@@ -2008,7 +1990,6 @@ export default {
             "@" +
             res.data.result.data.output.fps +
             "Hz";
-          console.log(that.fblselect);
           let lay = JSON.parse(JSON.stringify(that.layoutMsg));
           let row;
           let column;
@@ -2027,6 +2008,7 @@ export default {
                 row = 2;
               }
             }
+            // that.modeselected = row;
             that.createMultiLeft(row, false);
           } else {
             row = 1;
@@ -2039,6 +2021,7 @@ export default {
                 row++;
               }
             }
+            // that.modeselected = 0;
             that.createMulti(row, column, false);
           }
           let deviceInfo = that.$store.state.deviceInfo.device;
@@ -2052,7 +2035,6 @@ export default {
             }
           }
           that.nameMsg = lay;
-          console.log(that.nameMsg);
           that.inVCon = [];
           for (let j = 0; j < deviceInfo.length; j++) {
             if (deviceInfo[j].baseinfo.type == 1) {
@@ -2067,7 +2049,6 @@ export default {
               that.inVCon.push(deviceInfo[j]);
             }
           }
-          console.log("inVcon", that.inVCon);
           that.showoutV = JSON.parse(JSON.stringify(that.inVCon));
           that.showinV = [];
           for (let j = 0; j < that.inVCon.length; j++) {
@@ -2085,7 +2066,6 @@ export default {
               }
             }
           }
-          console.log(that.showoutV, that.showinV);
         } else {
           notification.error({
             message: "打开多画面失败",
@@ -2132,7 +2112,7 @@ export default {
           len++;
         }
       }
-      if (!namecheck.NameChecked(that.wallname, spacewarn)) {
+      if (!namecheck.NameChecked(this.addmultiname, spacewarn)) {
         return;
       }
       if (len > 32) {
@@ -2168,7 +2148,6 @@ export default {
           },
         },
       };
-      console.log(aodata);
       this.$axios.post("api/device/sdvoe", aodata).then(function (res) {
         if (res.data.status == "SUCCESS") {
           let multimsg = res.data.data;
@@ -2266,7 +2245,6 @@ export default {
 
       let multiConget = JSON.parse(JSON.stringify(that.multiConget));
       delete multiConget._id;
-      console.log(newobj, multiConget, equalsObj(newobj, multiConget));
       if (!equalsObj(newobj, multiConget)) {
         Modal.confirm({
           title: "多画面修改未保存，是否保存",
@@ -2306,7 +2284,7 @@ export default {
                 len++;
               }
             }
-            if (!namecheck.NameChecked(that.wallname, spacewarn)) {
+            if (!namecheck.NameChecked(that.multiName, spacewarn)) {
               return;
             }
             if (len > 32) {
@@ -2564,7 +2542,7 @@ export default {
                   len++;
                 }
               }
-              if (!namecheck.NameChecked(that.wallname, spacewarn)) {
+              if (!namecheck.NameChecked(that.multiName, spacewarn)) {
                 return;
               }
               if (len > 32) {

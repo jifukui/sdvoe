@@ -18,7 +18,7 @@
     </a-modal>
     <router-view class="mainscreen"></router-view>
     <BackModel v-if="false" class="BackModel"></BackModel>
-
+    <div class="Jmask" v-if="$store.state.Jmask"></div>
     <div class="upgradePage" v-if="$store.state.upgradePage">
       <a-spin tip="设备升级完成，重启中..."></a-spin>
     </div>
@@ -169,5 +169,12 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
+}
+.Jmask {
+  position: absolute;
+  height: calc(100% - 60px);
+  width: 100%;
+  background-color: #000;
+  opacity: 0.6;
 }
 </style>

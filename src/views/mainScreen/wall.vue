@@ -200,7 +200,7 @@
                   @click.stop="writeView()"
                 ></div>
               </div>
-              <div
+              <!-- <div
                 class="conright"
                 v-for="(item, index) in layoutMsg"
                 v-show="!allBoxSelect && boxIndex == index + 1"
@@ -251,8 +251,8 @@
                     </option>
                   </select>
                 </div>
-              </div>
-              <div class="conright" v-show="allBoxSelect">
+              </div> -->
+              <div class="conright">
                 <div class="conposition">
                   <h2>位置</h2>
                   <div class="posiinput">
@@ -261,7 +261,7 @@
                       <input
                         class="input_small"
                         type="text"
-                        v-model="bezeltop"
+                        v-model="bezel_top"
                         @change="setalltop()"
                       />
                     </div>
@@ -270,7 +270,7 @@
                       <input
                         class="input_small"
                         type="text"
-                        v-model="bezelleft"
+                        v-model="bezel_left"
                         @change="setallleft()"
                       />
                     </div>
@@ -279,7 +279,7 @@
                       <input
                         class="input_small"
                         type="text"
-                        v-model="bezelbottom"
+                        v-model="bezel_bottom"
                         @change="setallbottom()"
                       />
                     </div>
@@ -288,7 +288,7 @@
                       <input
                         class="input_small"
                         type="text"
-                        v-model="bezelright"
+                        v-model="bezel_right"
                         @change="setallright()"
                       />
                     </div>
@@ -298,7 +298,7 @@
                   <h2>分辨率</h2>
                   <select
                     class="select_normal"
-                    v-model="fblselect"
+                    v-model="resolution"
                     @change="setallfpl()"
                   >
                     <option v-for="(item, index) in selectarr" :key="index">
@@ -331,10 +331,12 @@
 </template>
 
 <script>
-const spacewarn = "电视墙名称不能全是空格，请重试"
+const spacewarn = "电视墙名称不能全是空格，请重试";
+
+import * as utils from "../../js/utils";
 import viewCon from "../../components/viewContent";
 import { Modal, message, notification } from "ant-design-vue";
-import * as namecheck   from "../../js/namespace";
+import * as namecheck from "../../js/namespace";
 export default {
   name: "Wall",
   components: {
@@ -407,7 +409,7 @@ export default {
       boxwidth: 0,
       boxheight: 0,
       writeViewBox: false,
-      boxIndex: 0,
+      boxIndex: null,
       allBoxSelect: true,
       wallvalue: false,
       addwallname: "",
@@ -425,9 +427,46 @@ export default {
       overindex: -1,
       showinV: [],
       showoutV: [],
+      bezel_top: 0,
+      bezel_left: 0,
+      bazel_bottom: 0,
+      bazel_right: 0,
+      resolution: 0,
     };
   },
-  watch: {},
+  watch: {
+    layoutMsg: {
+      // handler: function (value) {
+      //   console.log(`I have change ${value}`);
+      //   console.log(`boxIndex ${this.boxIndex} `);
+      //   console.log(`allBoxSelect ${this.allBoxSelect}`);
+      // },
+      // deep: true,
+    },
+    boxIndex: function (value) {
+      if (value) {
+        let info = this.layoutMsg[value - 1];
+        let bezel = info.bezel;
+        this.bezel_top = bezel.top;
+        this.bezel_left = bezel.left;
+        this.bezel_bottom = bezel.bottom;
+        this.bezel_right = bezel.right;
+        this.resolution = info.fbl;
+      } else {
+        this.bezel_top = this.bezeltop;
+        this.bezel_left = this.bezelleft;
+        this.bezel_bottom = this.bezelbottom;
+        this.bezel_right = this.bezelright;
+        this.resolution = this.fblselect;
+      }
+      console.log(`this.bezel_top ${this.bezel_top}`);
+      console.log(`this.bezel_left ${this.bezel_left}`);
+      console.log(`this.bezel_bottom ${this.bezel_bottom}`);
+      console.log(`this.bezel_right ${this.bezel_right}`);
+      console.log(`this.resolution ${this.resolution}`);
+      console.dir(this.layoutMsg);
+    },
+  },
   computed: {},
   methods: {
     closeWallPage() {
@@ -472,7 +511,6 @@ export default {
           },
         },
       };
-      console.log(aodata.command.data, that.getMsg);
       if (JSON.stringify(aodata.command.data) != JSON.stringify(that.getMsg)) {
         Modal.confirm({
           title: "电视墙修改未保存，是否保存",
@@ -502,7 +540,7 @@ export default {
               }
             }
             // jifukui
-            if(!namecheck.NameChecked(that.wallname,spacewarn)){
+            if (!namecheck.NameChecked(that.wallname, spacewarn)) {
               return;
             }
             let len = 0;
@@ -631,31 +669,100 @@ export default {
       this.boxIndex = 0;
     },
     setallfpl() {
-      for (let i = 0; i < this.layoutMsg.length; i++) {
-        this.layoutMsg[i].fbl = this.fblselect;
+      if (this.boxIndex) {
+        this.layoutMsg[this.boxIndex - 1].fbl = this.resolution;
+      } else {
+        this.setAllProp(this.layoutMsg.layout, ["fbl"], this.resolution);
       }
     },
     setalltop() {
-      for (let i = 0; i < this.layoutMsg.length; i++) {
-        this.layoutMsg[i].bezel.top = parseInt(this.bezeltop);
-      }
+      let value = this.checkProp(this.bezel_top);
+      value
+        .then((res) => {
+          if (this.boxIndex) {
+            this.layoutMsg[this.boxIndex - 1].bezel.top = res;
+          } else {
+            this.bezeltop = res;
+            this.fblselect = this.resolution;
+            this.setAllProp(this.layoutMsg, ["bezel", "top"], res);
+          }
+        })
+        .catch((err) => {});
     },
     setallleft() {
-      for (let i = 0; i < this.layoutMsg.length; i++) {
-        this.layoutMsg[i].bezel.left = parseInt(this.bezelleft);
-      }
+      let value = this.checkProp(this.bezel_left);
+      value
+        .then((res) => {
+          if (this.boxIndex) {
+            this.layoutMsg[this.boxIndex - 1].bezel.left = res;
+          } else {
+            this.bezelleft = res;
+            this.setAllProp(this.layoutMsg, ["bezel", "left"], res);
+          }
+        })
+        .catch(() => {
+          console.log("have error");
+        });
     },
     setallbottom() {
-      console.log(this.bezelbottom);
-      for (let i = 0; i < this.layoutMsg.length; i++) {
-        this.layoutMsg[i].bezel.bottom = parseInt(this.bezelbottom);
-      }
+      let value = this.checkProp(this.bezel_bottom);
+      value
+        .then((res) => {
+          if (this.boxIndex) {
+            this.layoutMsg[this.boxIndex - 1].bezel.bottom = res;
+          } else {
+            this.bezelbottom = res;
+            this.setAllProp(this.layoutMsg, ["bezel", "bottom"], res);
+          }
+        })
+        .catch(() => {});
     },
     setallright() {
-      console.log(this.bezelright);
-      for (let i = 0; i < this.layoutMsg.length; i++) {
-        this.layoutMsg[i].bezel.right = parseInt(this.bezelright);
+      let value = this.checkProp(this.bezel_right);
+      value
+        .then((res) => {
+          if (this.boxIndex) {
+            this.layoutMsg[this.boxIndex - 1].bezel.right = res;
+          } else {
+            this.bezelright = res;
+            this.setAllProp(this.layoutMsg, ["bezel", "right"], res);
+          }
+        })
+        .catch(() => {});
+    },
+    setAllProp(obj, prop, value) {
+      console.log("i have called");
+      console.dir(obj);
+      for (let i = 0; i < obj.length; i++) {
+        let data = obj[i];
+        let j;
+        for (j = 0; j < prop.length - 1; j++) {
+          data = data[prop[j]];
+        }
+        console.log(`j is ${j}`);
+
+        data[prop[j]] = value;
       }
+    },
+    async checkProp(value) {
+      return await utils.checkNumer(value).then(
+        (res) => {
+          if (res <= 128 && res >= 0) {
+            console.log("good");
+            return Promise.resolve(res);
+          } else {
+            console.log("over");
+            notification.warning({
+              message: "参数超出范围",
+              duration: 1,
+            });
+            return Promise.reject("fuck");
+          }
+        },
+        (rej) => {
+          return Promise.reject();
+        }
+      );
     },
     boxView(index) {
       this.boxIndex = index + 1;
@@ -757,9 +864,7 @@ export default {
       }
     },
     setOne(index) {
-      console.log(index);
       this.fromindex = index;
-      console.log(this.fromindex);
       this.$store.state.dropType = "wallone";
     },
     setwidth() {
@@ -871,7 +976,7 @@ export default {
           len++;
         }
       }
-      if(!namecheck.NameChecked(this.addwallname,spacewarn)){
+      if (!namecheck.NameChecked(this.addwallname, spacewarn)) {
         return;
       }
       if (len > 32) {
@@ -1023,7 +1128,7 @@ export default {
           delete that.getMsg._id;
           that.$store.state.wallConPage = true;
           that.wallname = that.wallMsg.name;
-          that.layoutMsg = that.wallMsg.layout; 
+          that.layoutMsg = that.wallMsg.layout;
           let column = 1;
           let row = 1;
           for (let i = 1; i < that.layoutMsg.length; i++) {
@@ -1099,7 +1204,7 @@ export default {
               that.outVCon.push(deviceInfo[i]);
             }
           }
-          console.log(that.layoutMsg);
+
           that.showoutV = JSON.parse(JSON.stringify(that.outVCon));
           that.showinV = [];
           for (let j = 0; j < that.outVCon.length; j++) {
@@ -1138,7 +1243,6 @@ export default {
           },
         },
       };
-      console.log(aodata);
       let that = this;
       Modal.confirm({
         title: "是否删除电视墙-" + data,
@@ -1201,20 +1305,18 @@ export default {
         });
         return;
       }
-      if(!namecheck.NameChecked(this.wallname,spacewarn)){
+      if (!namecheck.NameChecked(this.wallname, spacewarn)) {
         return;
       }
       let that = this;
       for (let i = 0; i < that.layoutMsg.length; i++) {
-        that.layoutMsg[i].Output.width = parseInt(
-          that.layoutMsg[i].fbl.split("×")[0]
-        );
-        that.layoutMsg[i].Output.height = parseInt(
-          that.layoutMsg[i].fbl.split("×")[1].split("@")[0]
-        );
-        that.layoutMsg[i].Output.fps = parseInt(
-          that.layoutMsg[i].fbl.split("@")[1].split("Hz")[0]
-        );
+        let resolution = that.layoutMsg[i].fbl;
+        let res = resolution.match(/(\d+)×(\d+)@(\d+)/);
+        if (res) {
+          that.layoutMsg[i].Output.width = parseInt(res[1]);
+          that.layoutMsg[i].Output.height = parseInt(res[2]);
+          that.layoutMsg[i].Output.fps = parseInt(res[3]);
+        }
       }
       let aodata = {
         command: {
@@ -1244,7 +1346,8 @@ export default {
       for (let i = 0; i < aodata.command.data.layout.length; i++) {
         delete aodata.command.data.layout[i].fbl;
       }
-      console.log(aodata);
+      // console.log(aodata);
+      // return;
       if (state == 0) {
         this.$axios.post("api/device/sdvoe", aodata).then(function (res) {
           if (res.data.status == "SUCCESS") {
@@ -1406,7 +1509,7 @@ export default {
                 len++;
               }
             }
-            if(!namecheck.NameChecked(that.wallname,spacewarn)){
+            if (!namecheck.NameChecked(that.wallname, spacewarn)) {
               return;
             }
             if (len > 32) {

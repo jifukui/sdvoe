@@ -219,7 +219,7 @@ export default {
               });
               return;
             }
-            if (!namecheck.NameChecked(that.wallname, spacewarn)) {
+            if (!namecheck.NameChecked(that.groupname, spacewarn)) {
               return;
             }
             if ("VIDEO_" + that.groupname != that.$store.state.groupMsg.name) {
@@ -524,7 +524,7 @@ export default {
         });
         return;
       }
-      if (!namecheck.NameChecked(that.wallname, spacewarn)) {
+      if (!namecheck.NameChecked(that.groupname, spacewarn)) {
         return;
       }
       let group = this.$store.state.deviceInfo.group;
@@ -781,7 +781,7 @@ export default {
               });
               return;
             }
-            if (!namecheck.NameChecked(that.wallname, spacewarn)) {
+            if (!namecheck.NameChecked(that.groupname, spacewarn)) {
               return;
             }
             if ("VIDEO_" + that.groupname != that.$store.state.groupMsg.name) {
