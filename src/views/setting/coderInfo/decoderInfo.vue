@@ -84,10 +84,7 @@
               @click="switchCoder(4)"
               :class="{ sys_li_click: coderIndex == 4 }"
             >
-              <div
-                class="showtit showcon"
-                :class="{ showtit_click: coderIndex == 4 }"
-              >
+              <div class="showtit showcon" :class="{ showtit_click: coderIndex == 4 }">
                 -
               </div>
               <p :class="{ showtit_click_p: coderIndex == 4 }">视频参数</p>
@@ -97,10 +94,7 @@
               @click="switchCoder(5)"
               :class="{ sys_li_click: coderIndex == 5 }"
             >
-              <div
-                class="showtit showcon"
-                :class="{ showtit_click: coderIndex == 5 }"
-              >
+              <div class="showtit showcon" :class="{ showtit_click: coderIndex == 5 }">
                 -
               </div>
               <p :class="{ showtit_click_p: coderIndex == 5 }">音频参数</p>
@@ -156,9 +150,7 @@
                 <div class="btn_bigsquare coderbtn1" @click="handupDevice()">
                   {{ decoderInfo.baseinfo.HandUp ? "停止闪烁" : "设备呼叫" }}
                 </div>
-                <div class="btn_bigsquare coderbtn2" @click="savePage1()">
-                  保存
-                </div>
+                <div class="btn_bigsquare coderbtn2" @click="savePage1()">保存</div>
               </div>
             </div>
           </div>
@@ -218,9 +210,7 @@
                     />
                   </li>
                 </ul>
-                <div class="btn_bigsquare coderbtn2" @click="savePage2()">
-                  保存
-                </div>
+                <div class="btn_bigsquare coderbtn2" @click="savePage2()">保存</div>
               </div>
             </div>
           </div>
@@ -244,9 +234,7 @@
                   >
                     <p class="coder_name">EDID信息：</p>
                     <div class="edidPic">
-                      <span class="errmsg" v-show="!edidread">{{
-                        ediderr
-                      }}</span>
+                      <span class="errmsg" v-show="!edidread">{{ ediderr }}</span>
                       <span class="edidmsg" v-show="edidread">
                         <div class="edidname">{{ edidname }}</div>
                         <div class="edidsize">{{ edidsize }}</div>
@@ -256,9 +244,7 @@
                     </div>
                   </li>
                 </ul>
-                <div class="btn_bigsquare coderbtn2" @click="refresh()">
-                  信息同步
-                </div>
+                <div class="btn_bigsquare coderbtn2" @click="refresh()">信息同步</div>
               </div>
             </div>
           </div>
@@ -282,10 +268,7 @@
                   <li class="coder_li">
                     <p class="coder_name">点对点模式：</p>
                     <select name="" class="select_big" v-model="modeselect">
-                      <option
-                        v-for="(item, index) in modeselectarr"
-                        :key="index"
-                      >
+                      <option v-for="(item, index) in modeselectarr" :key="index">
                         {{ item.value }}
                       </option>
                     </select>
@@ -293,10 +276,7 @@
                   <li class="coder_li" v-if="modeselect != '帧同步'">
                     <p class="coder_name">输出分辨率：</p>
                     <select name="" class="select_big" v-model="fblselect">
-                      <option
-                        v-for="(item, index) in fblselectarr"
-                        :key="index"
-                      >
+                      <option v-for="(item, index) in fblselectarr" :key="index">
                         {{ item.value }}
                       </option>
                     </select>
@@ -304,19 +284,14 @@
                   <li class="coder_li">
                     <p class="coder_name">HDCP：</p>
                     <select name="" class="select_big" v-model="hdcpselect">
-                      <option
-                        v-for="(item, index) in hdcpselectarr"
-                        :key="index"
-                      >
+                      <option v-for="(item, index) in hdcpselectarr" :key="index">
                         {{ item.value }}
                       </option>
                     </select>
                   </li>
                 </ul>
                 <div class="btn_bigsquare coderbtn1" v-show="false">高级</div>
-                <div class="btn_bigsquare coderbtn2" @click="savePage3()">
-                  保存
-                </div>
+                <div class="btn_bigsquare coderbtn2" @click="savePage3()">保存</div>
               </div>
             </div>
           </div>
@@ -328,11 +303,7 @@
                     <p class="coder_name">标题名称：</p>
                     <em class="inputreadonly">{{ page1name }}</em>
                     <em class="nameheng">-</em>
-                    <input
-                      class="input_big inputset"
-                      type="text"
-                      v-model="page4name"
-                    />
+                    <input class="input_big inputset" type="text" v-model="page4name" />
                   </li>
                   <li class="coder_li">
                     <p class="coder_name">延迟出声：</p>
@@ -345,9 +316,7 @@
                   </li>
                 </ul>
                 <div class="btn_bigsquare coderbtn1" v-show="false">高级</div>
-                <div class="btn_bigsquare coderbtn2" @click="savePage4()">
-                  保存
-                </div>
+                <div class="btn_bigsquare coderbtn2" @click="savePage4()">保存</div>
               </div>
             </div>
           </div>
@@ -359,11 +328,7 @@
                     <p class="coder_name">标题名称：</p>
                     <em class="inputreadonly">{{ page1name }}</em>
                     <em class="nameheng">-</em>
-                    <input
-                      class="input_big inputset"
-                      type="text"
-                      v-model="page5name"
-                    />
+                    <input class="input_big inputset" type="text" v-model="page5name" />
                   </li>
                   <li class="coder_li">
                     <p class="coder_name">端口方向：</p>
@@ -377,9 +342,7 @@
                   </li>
                 </ul>
                 <div class="btn_bigsquare coderbtn1" v-show="false">高级</div>
-                <div class="btn_bigsquare coderbtn2" @click="savePage5()">
-                  保存
-                </div>
+                <div class="btn_bigsquare coderbtn2" @click="savePage5()">保存</div>
               </div>
             </div>
           </div>
@@ -396,13 +359,27 @@
                   <li class="coder_li">
                     <p class="coder_name">升级：</p>
                     <select name="" class="select_big" v-model="fileipselect">
-                      <option
-                        v-for="(item, index) in fileselectarr"
-                        :key="index"
-                      >
+                      <option v-for="(item, index) in fileselectarr" :key="index">
                         {{ item.value }}
                       </option>
                     </select>
+                    <span v-show="fileipselect != '不升级'">
+                      <input
+                        v-show="firmwareUpgradeStatus == null"
+                        class="upgradeButton"
+                        type="button"
+                        value="升级"
+                        @click="upgradeFirmware()"
+                      />
+                      <span v-show="firmwareUpgradeStatus != null">
+                        <input
+                          type="text"
+                          class="upgradeText"
+                          :value="firmwareUpgradeStatus + '%'"
+                          attr="disabled"
+                        />
+                      </span>
+                    </span>
                   </li>
                   <li class="coder_li">
                     <p class="coder_name">重启设备：</p>
@@ -412,15 +389,11 @@
                   </li>
                   <li class="coder_li">
                     <p class="coder_name">恢复出厂设置</p>
-                    <div class="btn_bigsquare sys_btn" @click="facDevice()">
-                      恢复
-                    </div>
+                    <div class="btn_bigsquare sys_btn" @click="facDevice()">恢复</div>
                   </li>
                   <li class="coder_li" v-if="false">
                     <p class="coder_name">删除设备：</p>
-                    <div class="btn_bigsquare sys_btn" @click="delDevice()">
-                      删除
-                    </div>
+                    <div class="btn_bigsquare sys_btn" @click="delDevice()">删除</div>
                   </li>
                 </ul>
               </div>
@@ -518,12 +491,7 @@ export default {
         { value: "输出", option: 2 },
       ],
       portipselect: "输入",
-      fileselectarr: [
-        { value: "不升级", option: 1 },
-        { value: "升级包1", option: 2 },
-        { value: "升级包2", option: 2 },
-        { value: "升级包3", option: 2 },
-      ],
+      fileselectarr: [{ value: "不升级", option: 1 }],
       fileipselect: "不升级",
       decoderInfo: {},
       edid: "",
@@ -539,6 +507,9 @@ export default {
       ediderr: "",
       showpage: false,
       timer: "",
+      firmwareUpgradeStatus: null,
+      deviceId: null,
+      upgradetimer: null,
     };
   },
   watch: {
@@ -551,8 +522,143 @@ export default {
     gatewayaddr: function (value) {
       this.gatestatus = checkInp.fnValidateGateway(value);
     },
+    firmwareUpgradeStatus: function (value) {
+      if (value == 100) {
+        let aodata1 = {
+          command: {
+            type: "set",
+            command: "DeviceRestart",
+            device_mode: "SDVOE",
+            data: {
+              device: [this.deviceId],
+            },
+          },
+        };
+
+        this.$axios.post("api/device/sdvoe", aodata1).then(function (res) {
+          if (res.data.status == "SUCCESS") {
+            console.log(`good reboot`);
+          } else {
+            notification.error({
+              message: "重启失败",
+              duration: 1,
+            });
+          }
+        });
+        this.$store.state.Jmask = false;
+        this.$store.state.upgradePage = true;
+        this.firmwareUpgradeStatus = null;
+        (this.fileipselect = "不升级"),
+          setTimeout(() => {
+            notification.success({
+              message: "重启成功",
+              duration: 1,
+            });
+            this.$store.state.upgradePage = false;
+          }, 20000);
+
+        clearInterval(this.upgradetimer);
+        this.getdevice();
+        let that = this;
+        this.timer = setInterval(function () {
+          that.getdevice();
+        }, 5000);
+      }
+    },
   },
   methods: {
+    getUpgradeFile() {
+      // fileselectarr;
+      let that = this;
+      let aodata1 = {
+        command: {
+          type: "get",
+          command: "DeviceUpGradeFileList",
+          device_mode: "SDVOE",
+          data: {},
+        },
+      };
+      this.$axios.post("api/device/sdvoe", aodata1).then(function (res) {
+        if ((res.data.state = "SUCCESS")) {
+          let filearr = res.data.result.data.firmware;
+          for (let i = 0; i < filearr.length; i++) {
+            let val = {};
+            val.value = filearr[i].file_name;
+            val.option = i + 2;
+            that.fileselectarr.push(val);
+          }
+        }
+      });
+    },
+    upgradeFirmware() {
+      this.firmwareUpgradeStatus = 0;
+      let that = this;
+      Modal.confirm({
+        title:
+          "是否升级设备" + that.decoderInfo.baseinfo.alias + "--" + that.fileipselect,
+        okText: "确定",
+        cancelText: "取消",
+        onOk() {
+          that.$store.state.Jmask = true;
+          let aodata = {
+            command: {
+              type: "set",
+              command: "DeviceUpgrade",
+              device_mode: "SDVOE",
+              data: {
+                device: [that.deviceId],
+                file: that.fileipselect,
+              },
+            },
+          };
+          that.$axios.post("api/device/sdvoe", aodata).then(function (res) {
+            if ((res.data.state = "SUCCESS")) {
+              that.firmwareUpgradeStatus = 0;
+              clearInterval(that.timer);
+              setTimeout(() => {
+                that.getprocess();
+              }, 1500);
+              clearInterval(that.upgradetimer);
+              that.upgradetimer = setInterval(function () {
+                that.getprocess();
+              }, 5000);
+            } else {
+              notification.error({
+                message: "设备升级失败",
+                duration: 1,
+              });
+            }
+          });
+        },
+        onCancel() {
+          that.firmwareUpgradeStatus = null;
+        },
+      });
+    },
+    getprocess() {
+      console.log(`i have start`);
+      let aodata = {
+        command: {
+          type: "get",
+          command: "DeviceUpgradeStatus",
+          device_mode: "SDVOE",
+          data: {},
+        },
+      };
+      let that = this;
+      this.$axios.post("api/device/sdvoe", aodata).then(function (res) {
+        if (res.data.status == "SUCCESS") {
+          let arr = res.data.result.data;
+          console.dir(arr);
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i].device_id == that.deviceId) {
+              that.firmwareUpgradeStatus = arr[i].process;
+              break;
+            }
+          }
+        }
+      });
+    },
     refresh() {
       this.getdevice();
     },
@@ -591,8 +697,7 @@ export default {
       that.ipaddr = that.decoderInfo.network.ip_address;
       that.maskaddr = that.decoderInfo.network.submask;
       that.gatewayaddr = that.decoderInfo.network.gateway;
-      that.audiodelay =
-        that.decoderInfo.HDMI[0].subscript[1].config.audio_delay;
+      that.audiodelay = that.decoderInfo.HDMI[0].subscript[1].config.audio_delay;
       that.page4name = that.decoderInfo.HDMI[0].subscript[1].config.alias;
       that.page5name = that.decoderInfo.AnalogAudio[0].config.alias;
       switch (that.decoderInfo.HDMI[0].subscript[0].config.p2pmode) {
@@ -632,13 +737,11 @@ export default {
           "Hz";
       }
       that.hdcpselect =
-        that.decoderInfo.HDMI[0].sink[0].config.hdcp_output_mode ==
-        "FOLLOW_SOURCE"
+        that.decoderInfo.HDMI[0].sink[0].config.hdcp_output_mode == "FOLLOW_SOURCE"
           ? "跟随输入"
           : "跟随输出";
     },
     getdevice() {
-      console.log("执行");
       let that = this;
       let aodata = {
         command: {
@@ -662,7 +765,7 @@ export default {
             if (deviceInfo[i].baseinfo.id == that.$store.state.coderID) {
               that.decoderInfo = deviceInfo[i];
               that.showpage = true;
-              console.log(JSON.stringify(that.decoderInfo));
+              // console.log(JSON.stringify(that.decoderInfo));
               that.edid = that.decoderInfo.HDMI[0].sink[0].monitor.state.edid;
               if (EDID.setEdidData(that.edid) == "errorEDID") {
                 that.edidread = false;
@@ -678,13 +781,12 @@ export default {
               that.ipselect = that.decoderInfo.network.DHCP
                 ? "自动获取IP地址"
                 : "使用下面的IP地址";
+              that.deviceId = that.decoderInfo.device_id;
               that.ipaddr = that.decoderInfo.network.ip_address;
               that.maskaddr = that.decoderInfo.network.submask;
               that.gatewayaddr = that.decoderInfo.network.gateway;
-              that.audiodelay =
-                that.decoderInfo.HDMI[0].subscript[1].config.audio_delay;
-              that.page4name =
-                that.decoderInfo.HDMI[0].subscript[1].config.alias;
+              that.audiodelay = that.decoderInfo.HDMI[0].subscript[1].config.audio_delay;
+              that.page4name = that.decoderInfo.HDMI[0].subscript[1].config.alias;
               that.page5name = that.decoderInfo.AnalogAudio[0].config.alias;
               // HDMI[0].subscript[0].config.p2pmode
               switch (that.decoderInfo.HDMI[0].subscript[0].config.p2pmode) {
@@ -727,7 +829,6 @@ export default {
                   : "跟随输出";
             }
           }
-          console.log("2222222222", that.modeselectarr, that.modeselect);
         }
       });
     },
@@ -758,8 +859,7 @@ export default {
       for (let i = 0; i < deviceInfo.length; i++) {
         if (this.$store.state.coderID == deviceInfo[i].baseinfo.id) {
           if (i == 0) {
-            this.$store.state.coderID =
-              deviceInfo[deviceInfo.length - 1].baseinfo.id;
+            this.$store.state.coderID = deviceInfo[deviceInfo.length - 1].baseinfo.id;
             this.$store.state.coderMsg = deviceInfo[deviceInfo.length - 1];
             console.log("前进，i是0，index是", i);
           } else {
@@ -855,10 +955,7 @@ export default {
         }
         let len = 0;
         for (let i = 0; i < this.page1name.length; i++) {
-          if (
-            this.page1name.charCodeAt(i) > 127 ||
-            this.page1name.charCodeAt(i) == 94
-          ) {
+          if (this.page1name.charCodeAt(i) > 127 || this.page1name.charCodeAt(i) == 94) {
             len += 2;
           } else {
             len++;
@@ -960,13 +1057,7 @@ export default {
           });
           return;
         }
-        if (
-          !checkInp.fnipmaskgateway(
-            this.ipaddr,
-            this.maskaddr,
-            this.gatewayaddr
-          )
-        ) {
+        if (!checkInp.fnipmaskgateway(this.ipaddr, this.maskaddr, this.gatewayaddr)) {
           notification.warning({
             message: "IP地址、子网掩码、默认网关不匹配",
             duration: 1,
@@ -1050,8 +1141,7 @@ export default {
         mode != this.decoderInfo.HDMI[0].subscript[0].config.p2pmode ||
         this.fblselect != this.decoderInfo.fblselect ||
         this.hdcpselect !=
-          (this.decoderInfo.HDMI[0].sink[0].config.hdcp_output_mode ==
-          "FOLLOW_SOURCE"
+          (this.decoderInfo.HDMI[0].sink[0].config.hdcp_output_mode == "FOLLOW_SOURCE"
             ? "跟随输入"
             : "跟随输出")
       ) {
@@ -1105,8 +1195,7 @@ export default {
         } else {
           if (
             this.hdcpselect ==
-            (this.decoderInfo.HDMI[0].sink[0].config.hdcp_output_mode ==
-            "FOLLOW_SOURCE"
+            (this.decoderInfo.HDMI[0].sink[0].config.hdcp_output_mode == "FOLLOW_SOURCE"
               ? "跟随输入"
               : "跟随输出")
           ) {
@@ -1146,8 +1235,7 @@ export default {
         }
         if (
           this.hdcpselect !=
-          (this.decoderInfo.HDMI[0].sink[0].config.hdcp_output_mode ==
-          "FOLLOW_SOURCE"
+          (this.decoderInfo.HDMI[0].sink[0].config.hdcp_output_mode == "FOLLOW_SOURCE"
             ? "跟随输入"
             : "跟随输出")
         ) {
@@ -1195,8 +1283,7 @@ export default {
       let name = this.decoderInfo.HDMI[0].subscript[1].config.alias;
       if (
         name != this.page4name ||
-        this.audiodelay !=
-          this.decoderInfo.HDMI[0].subscript[1].config.audio_delay
+        this.audiodelay != this.decoderInfo.HDMI[0].subscript[1].config.audio_delay
       ) {
         if (name != this.page4name) {
           if (this.page4name == "") {
@@ -1254,10 +1341,7 @@ export default {
             }
           });
         }
-        if (
-          this.audiodelay !=
-          this.decoderInfo.HDMI[0].subscript[1].config.audio_delay
-        ) {
+        if (this.audiodelay != this.decoderInfo.HDMI[0].subscript[1].config.audio_delay) {
           if (this.audiodelay > 5000 || this.audiodelay < 0) {
             notification.warning({
               message: "延迟出声参数设置错误(0~5000)",
@@ -1311,10 +1395,7 @@ export default {
         }
         let len = 0;
         for (let i = 0; i < this.page5name.length; i++) {
-          if (
-            this.page5name.charCodeAt(i) > 127 ||
-            this.page5name.charCodeAt(i) == 94
-          ) {
+          if (this.page5name.charCodeAt(i) > 127 || this.page5name.charCodeAt(i) == 94) {
             len += 2;
           } else {
             len++;
@@ -1449,7 +1530,9 @@ export default {
   },
   created() {
     let that = this;
+    console.log("input 2");
     that.decoderInfo = that.$store.state.coderMsg;
+    that.getUpgradeFile();
     that.getdevice();
     if (that.$store.state.openPageAvalue == "digitaloutA") {
       that.coderIndex = 5;
@@ -1457,10 +1540,10 @@ export default {
       that.coderIndex = 6;
     }
   },
-  // beforeUnmount() {
-  //   clearInterval(this.timer);
-  // },
   mounted() {},
+  beforeUnmount() {
+    clearInterval(this.timer);
+  },
 };
 </script>
 <style scoped>
@@ -1765,5 +1848,17 @@ select {
 }
 .readonlyinp {
   background-color: #ddd;
+}
+.upgradeButton,
+.upgradeText {
+  margin-left: 5px;
+  height: 28px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  width: 80px;
+}
+.upgradeText {
+  width: 50px;
+  background-color: #888;
 }
 </style>

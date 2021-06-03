@@ -10,9 +10,7 @@
     <a-modal v-model:visible="loginoutbox" title="退出登录">
       <template v-slot:footer>
         <a-button key="back" @click="handleCancel"> 取消 </a-button>
-        <a-button key="submit" type="primary" @click="handleOk">
-          确定
-        </a-button>
+        <a-button key="submit" type="primary" @click="handleOk"> 确定 </a-button>
       </template>
       是否退出
     </a-modal>
@@ -100,6 +98,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 #indexhtml {
   height: 100%;
