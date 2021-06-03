@@ -35,27 +35,15 @@
         >
           <template v-slot:footer>
             <a-button key="back" @click="addgroupCancel"> 取消 </a-button>
-            <a-button key="submit" type="primary" @click="addgroupSet">
-              确定
-            </a-button>
+            <a-button key="submit" type="primary" @click="addgroupSet"> 确定 </a-button>
           </template>
           <div class="grouptit">
             <p>组名：</p>
-            <input
-              type="text"
-              name=""
-              id=""
-              class="input_small"
-              v-model="addgroupname"
-            />
+            <input type="text" name="" id="" class="input_small" v-model="addgroupname" />
           </div>
           <div class="groupulout">
             <ul class="groupul">
-              <li
-                v-for="(item, index) in groupcheck"
-                :key="index"
-                class="groupli"
-              >
+              <li v-for="(item, index) in groupcheck" :key="index" class="groupli">
                 <p>{{ item.name }}</p>
                 <input type="checkbox" name="" id="" v-model="item.check" />
               </li>
@@ -158,6 +146,7 @@ export default {
       groupname: "",
       groupsavevalue: false,
       timer: "",
+      grouptimer: null,
       offlinede: [],
     };
   },
@@ -165,7 +154,6 @@ export default {
   computed: {},
   methods: {
     deloffde(id) {
-      console.log(222222);
       for (let i = 0; i < this.offlinede.length; i++) {
         if ((this.offlinede[i].id = id)) {
           this.offlinede.splice(i, 1);
@@ -173,9 +161,12 @@ export default {
       }
     },
     closeGroupV() {
+      console.log("I have closed");
+      console.log(`the timer is ${this.grouptimer}`);
+      clearTimeout(this.grouptimer);
+      console.log(`the timer is ${this.grouptimer}`);
       let that = this;
       let arr = [];
-
       for (let i = 0; i < that.outVConG2.length; i++) {
         arr.push(that.outVConG2[i].baseinfo.id);
       }
@@ -379,16 +370,12 @@ export default {
                 deviceInfo[i].contenttype = "";
                 that.outVCon.push(deviceInfo[i]);
                 that.decoderarr.push(deviceInfo[i]);
-                deviceInfo[i].output =
-                  deviceInfo[i].HDMI[0].subscript[0].config.output;
+                deviceInfo[i].output = deviceInfo[i].HDMI[0].subscript[0].config.output;
                 if (deviceInfo[i].HDMI[0].subscript[0].config.mode === null) {
                   let conid = deviceInfo[i].HDMI[0].subscript[0].config.mac;
                   if (conid === null) {
                     deviceInfo[i].contenttype = "";
-                    if (
-                      deviceInfo[i].HDMI[0].subscript[0].config.p2pmode ==
-                      "genlock"
-                    ) {
+                    if (deviceInfo[i].HDMI[0].subscript[0].config.p2pmode == "genlock") {
                       deviceInfo[i].showfbl = false;
                       deviceInfo[i].output = {
                         width: undefined,
@@ -399,15 +386,11 @@ export default {
                       deviceInfo[i].showfbl = true;
                     }
                   } else {
-                    if (
-                      deviceInfo[i].HDMI[0].subscript[0].config.p2pmode ==
-                      "genlock"
-                    ) {
+                    if (deviceInfo[i].HDMI[0].subscript[0].config.p2pmode == "genlock") {
                       for (let j = 0; j < deviceInfo.length; j++) {
                         if (conid == deviceInfo[j].baseinfo.id) {
                           deviceInfo[i].contenttype = "inV";
-                          deviceInfo[i].contentname =
-                            deviceInfo[j].baseinfo.alias;
+                          deviceInfo[i].contentname = deviceInfo[j].baseinfo.alias;
                           if (
                             deviceInfo[j].HDMI[0].source[0].info.signal.video
                               .signalstate == true
@@ -427,8 +410,7 @@ export default {
                       for (let j = 0; j < deviceInfo.length; j++) {
                         if (conid == deviceInfo[j].baseinfo.id) {
                           deviceInfo[i].contenttype = "inV";
-                          deviceInfo[i].contentname =
-                            deviceInfo[j].baseinfo.alias;
+                          deviceInfo[i].contentname = deviceInfo[j].baseinfo.alias;
                         }
                       }
                     }
@@ -439,10 +421,8 @@ export default {
                   deviceInfo[i].contenttype = "wall";
                   deviceInfo[i].contentname =
                     deviceInfo[i].HDMI[0].subscript[0].config.template;
-                  deviceInfo[i].output =
-                    deviceInfo[i].HDMI[0].sink[0].info.signal.video;
-                  deviceInfo[i].output.fps =
-                    deviceInfo[i].output.frames_per_second;
+                  deviceInfo[i].output = deviceInfo[i].HDMI[0].sink[0].info.signal.video;
+                  deviceInfo[i].output.fps = deviceInfo[i].output.frames_per_second;
                   deviceInfo[i].showfbl = true;
                 } else if (
                   deviceInfo[i].HDMI[0].subscript[0].config.mode === "multiview"
@@ -580,7 +560,6 @@ export default {
           },
         },
       };
-      console.log(aodata);
       this.$axios.post("api/device/sdvoe", aodata).then(function (res) {
         if (res.data.status == "SUCCESS") {
           notification.success({
@@ -607,12 +586,11 @@ export default {
       });
     },
     openGroup(data) {
-      console.log("111111111111", data, this.$store.state.groupMsg);
+      this.grouptimer = data[3];
       let grouparr = this.$store.state.groupMsg.Device;
-
       this.offlinede = [];
-      this.outVConG1 = data[1];
-      this.outVConG2 = data[0];
+      this.outVConG1 = data[0];
+      this.outVConG2 = data[1];
       let arr = [];
       for (let j = 0; j < this.outVConG2.length; j++) {
         arr.push(this.outVConG2[j].baseinfo.id);
@@ -626,7 +604,6 @@ export default {
           this.offlinede.push(de);
         }
       }
-      console.log(arr, this.offlinede);
       this.groupname = data[2].slice(6);
     },
     delgroup(data) {
@@ -707,7 +684,6 @@ export default {
           }
         }
       }
-      console.log(arr1, arr2);
       this.outVConG1 = arr1;
       this.outVConG2 = arr2;
     },

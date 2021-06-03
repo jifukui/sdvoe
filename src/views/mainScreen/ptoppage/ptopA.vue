@@ -12,11 +12,7 @@
           ref="ptopContentL"
           :style="'padding:10px ' + eqIntervalL + 'px'"
         >
-          <viewCon
-            v-for="(item, index) in inACon"
-            :key="index"
-            :typeCon="item"
-          ></viewCon>
+          <viewCon v-for="(item, index) in inACon" :key="index" :typeCon="item"></viewCon>
         </div>
       </div>
       <div class="ptopBox ptopBoxR">
@@ -34,27 +30,15 @@
         >
           <template v-slot:footer>
             <a-button key="back" @click="addgroupCancel"> 取消 </a-button>
-            <a-button key="submit" type="primary" @click="addgroupSet">
-              确定
-            </a-button>
+            <a-button key="submit" type="primary" @click="addgroupSet"> 确定 </a-button>
           </template>
           <div class="grouptit">
             <p>组名：</p>
-            <input
-              type="text"
-              name=""
-              id=""
-              class="input_small"
-              v-model="addgroupname"
-            />
+            <input type="text" name="" id="" class="input_small" v-model="addgroupname" />
           </div>
           <div class="groupulout">
             <ul class="groupul">
-              <li
-                v-for="(item, index) in groupcheck"
-                :key="index"
-                class="groupli"
-              >
+              <li v-for="(item, index) in groupcheck" :key="index" class="groupli">
                 <p>{{ item.name }}</p>
                 <input type="checkbox" name="" id="" v-model="item.check" />
               </li>
@@ -159,6 +143,7 @@ export default {
       groupname: "",
       groupsavevalue: false,
       timer: "",
+      grouptimer: null,
       offlinede: [],
     };
   },
@@ -166,12 +151,8 @@ export default {
   computed: {},
   methods: {
     deloffde(data) {
-      console.log(222222, data);
       for (let i = 0; i < this.offlinede.length; i++) {
-        if (
-          this.offlinede[i].id == data.id &&
-          this.offlinede[i].type == data.type
-        ) {
+        if (this.offlinede[i].id == data.id && this.offlinede[i].type == data.type) {
           this.offlinede.splice(i, 1);
         }
       }
@@ -197,13 +178,13 @@ export default {
       return true;
     },
     closeGroupA() {
+      console.log("I want to close");
+      clearTimeout(this.grouptimer);
       let that = this;
       let arr = [];
-      console.log(that.outAConG2);
       for (let i = 0; i < that.outAConG2.length; i++) {
         let data = {
-          type:
-            that.outAConG2[i].type == "digitaloutA" ? "HDMI_AUDIO" : "AUDIO",
+          type: that.outAConG2[i].type == "digitaloutA" ? "HDMI_AUDIO" : "AUDIO",
           id: that.outAConG2[i].id,
         };
         arr.push(data);
@@ -212,7 +193,6 @@ export default {
       let arr1 = that.$store.state.groupMsg.Device;
       let arr2 = [];
       let arr3 = [];
-      console.log(that.$store.state.groupMsg, arr1);
       for (let i = 0; i < that.outAConG2.length; i++) {
         if (that.outAConG2[i].type == "digitaloutA") {
           arr2.push(that.outAConG2[i].id + "HDMI_AUDIO");
@@ -373,9 +353,8 @@ export default {
                 // that.inACon.push(deviceInfo[i]);
                 // that.encoderarr.push(deviceInfo[i]);
                 let digitalaudio =
-                  deviceInfo[i].HDMI[0].streams[
-                    deviceInfo[i].HDMI[0].streams.length - 1
-                  ].config;
+                  deviceInfo[i].HDMI[0].streams[deviceInfo[i].HDMI[0].streams.length - 1]
+                    .config;
                 digitalaudio.id = deviceInfo[i].baseinfo.id;
                 digitalaudio.type = "digitalinA";
                 digitalaudio.videoname = deviceInfo[i].baseinfo.alias;
@@ -383,17 +362,11 @@ export default {
                   deviceInfo[i].HDMI[0].source[0].info.signal.video.signalstate;
                 if (deviceInfo[i].HDMI[0].source[0].info.signal.audio != null) {
                   digitalaudio.audio_encoding_type =
-                    deviceInfo[
-                      i
-                    ].HDMI[0].source[0].info.signal.audio.audio_encoding_type;
+                    deviceInfo[i].HDMI[0].source[0].info.signal.audio.audio_encoding_type;
                   digitalaudio.number_of_channels =
-                    deviceInfo[
-                      i
-                    ].HDMI[0].source[0].info.signal.audio.number_of_channels;
+                    deviceInfo[i].HDMI[0].source[0].info.signal.audio.number_of_channels;
                   digitalaudio.sampling_frequency =
-                    deviceInfo[
-                      i
-                    ].HDMI[0].source[0].info.signal.audio.sampling_frequency;
+                    deviceInfo[i].HDMI[0].source[0].info.signal.audio.sampling_frequency;
                 } else {
                   digitalaudio.audio_encoding_type = "";
                   digitalaudio.number_of_channels = "";
@@ -416,7 +389,7 @@ export default {
                 digitalaudio.id = deviceInfo[i].baseinfo.id;
                 digitalaudio.type = "digitaloutA";
                 digitalaudio.videoname = deviceInfo[i].baseinfo.alias;
-                if (digitalaudio.mac === null) {
+                if (digitalaudio.mac === null || digitalaudio.select == 8) {
                   digitalaudio.contenttype = "";
                 } else {
                   digitalaudio.contenttype = "inA";
@@ -428,9 +401,7 @@ export default {
                           deviceInfo[j].baseinfo.alias +
                           "-" +
                           deviceInfo[j].AnalogAudio[0].config.alias.substring(
-                            deviceInfo[j].AnalogAudio[0].config.alias.indexOf(
-                              "-"
-                            ) + 1,
+                            deviceInfo[j].AnalogAudio[0].config.alias.indexOf("-") + 1,
                             deviceInfo[j].AnalogAudio[0].config.alias.length
                           );
                       } else {
@@ -458,7 +429,7 @@ export default {
                 analogaudio.id = deviceInfo[i].baseinfo.id;
                 analogaudio.type = "analogoutA";
                 analogaudio.videoname = deviceInfo[i].baseinfo.alias;
-                if (analogaudio.mac === null) {
+                if (analogaudio.mac === null || analogaudio.select == 8) {
                   analogaudio.contenttype = "";
                 } else {
                   analogaudio.contenttype = "inA";
@@ -470,9 +441,7 @@ export default {
                           deviceInfo[j].baseinfo.alias +
                           "-" +
                           deviceInfo[j].AnalogAudio[0].config.alias.substring(
-                            deviceInfo[j].AnalogAudio[0].config.alias.indexOf(
-                              "-"
-                            ) + 1,
+                            deviceInfo[j].AnalogAudio[0].config.alias.indexOf("-") + 1,
                             deviceInfo[j].AnalogAudio[0].config.alias.length
                           );
                       } else {
@@ -598,11 +567,9 @@ export default {
       for (let i = 0; i < that.groupcheck.length; i++) {
         if (that.groupcheck[i].check) {
           let data = {
-            type:
-              that.groupcheck[i].type == "digitaloutA" ? "HDMI_AUDIO" : "AUDIO",
+            type: that.groupcheck[i].type == "digitaloutA" ? "HDMI_AUDIO" : "AUDIO",
             id: that.groupcheck[i].id,
           };
-          console.log(data);
           grouparr.push(data);
         }
       }
@@ -640,7 +607,7 @@ export default {
       });
     },
     openGroup(data) {
-      console.log("111111111111", data);
+      this.grouptimer = data[3];
       let grouparr = this.$store.state.groupMsg.Device;
       this.offlinede = [];
       this.outAConG1 = data[1];
@@ -665,7 +632,6 @@ export default {
     },
 
     droptogroupA() {
-      console.log("fromname", this.$store.state.fromname, this.outAConG1);
       for (let i = 0; i < this.outAConG1.length; i++) {
         if (
           this.$store.state.fromname == this.outAConG1[i].alias &&
@@ -678,7 +644,6 @@ export default {
       this.cleangroup();
     },
     dropoutgroupA() {
-      console.log("fromname", this.$store.state.fromname);
       for (let i = 0; i < this.outAConG2.length; i++) {
         if (
           this.$store.state.fromname == this.outAConG2[i].alias &&
@@ -806,7 +771,6 @@ export default {
       let arr1 = that.$store.state.groupMsg.Device;
       let arr2 = [];
       let arr3 = [];
-      console.log(that.$store.state.groupMsg, arr1);
       for (let i = 0; i < that.outAConG2.length; i++) {
         if (that.outAConG2[i].type == "digitaloutA") {
           arr2.push(that.outAConG2[i].id + "HDMI_AUDIO");
@@ -820,7 +784,6 @@ export default {
       for (let i = 0; i < arr1.length; i++) {
         arr3.push(arr1[i].id + arr1[i].type);
       }
-      console.log(arr2, arr3);
       let aodata = {
         command: {
           type: "set",

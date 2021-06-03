@@ -1228,7 +1228,7 @@ export default {
       }
       if (boxnum > 32) {
         notification.warning({
-          message: "电视墙个数不能超过32个",
+          message: "多画面个数不能超过32个",
           duration: 1,
         });
         return;

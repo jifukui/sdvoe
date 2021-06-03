@@ -3,19 +3,13 @@
     <div
       class="eqBoxOut"
       v-if="
-        typeCon.type == 'inV' ||
-        typeCon.type == 'wallinV' ||
-        typeCon.type == 'multiinV'
+        typeCon.type == 'inV' || typeCon.type == 'wallinV' || typeCon.type == 'multiinV'
       "
     >
       <div
         class="eqBoxIn"
         @dragstart="
-          dropStartInV(
-            typeCon.type,
-            typeCon.baseinfo.alias,
-            typeCon.baseinfo.id
-          )
+          dropStartInV(typeCon.type, typeCon.baseinfo.alias, typeCon.baseinfo.id)
         "
         draggable="true"
       >
@@ -26,8 +20,7 @@
             :class="[
               {
                 eqsignalno:
-                  typeCon.HDMI[0].source[0].info.signal.video.signalstate ==
-                  false,
+                  typeCon.HDMI[0].source[0].info.signal.video.signalstate == false,
               },
             ]"
           ></div>
@@ -37,36 +30,29 @@
             <div
               :class="{
                 imgbg_inV:
-                  typeCon.HDMI[0].source[0].info.signal.video.signalstate ==
-                  true,
+                  typeCon.HDMI[0].source[0].info.signal.video.signalstate == true,
                 imgbg_inV_nosig:
-                  typeCon.HDMI[0].source[0].info.signal.video.signalstate ==
-                  false,
+                  typeCon.HDMI[0].source[0].info.signal.video.signalstate == false,
               }"
             ></div>
           </div>
         </div>
         <div class="eqcon">
           <p v-show="typeCon.HDMI[0].source[0].info.signal.video.signalstate">
-            {{videoinfo}}
+            {{ videoinfo }}
           </p>
           <p v-show="typeCon.HDMI[0].source[0].info.signal.video.signalstate">
-            {{hdcpstat}}
+            {{ hdcpstat }}
           </p>
           <div
             class="btn_smallcircular eqafv"
             v-if="typeCon.type == 'inV'"
             @click="setAfv(typeCon.baseinfo.id, typeCon)"
-            :class="
-              typeCon.HDMI[0].streams[0].config.afv ? 'eqafv_click' : 'eqafv'
-            "
+            :class="typeCon.HDMI[0].streams[0].config.afv ? 'eqafv_click' : 'eqafv'"
           >
             Av
           </div>
-          <div
-            class="btn_smallcircular eqset"
-            @click="openSetPage(typeCon)"
-          ></div>
+          <div class="btn_smallcircular eqset" @click="openSetPage(typeCon)"></div>
         </div>
       </div>
     </div>
@@ -76,11 +62,7 @@
         @dragover="dropOverOutV($event)"
         @drop="dropOutV(typeCon.baseinfo.alias, typeCon.baseinfo.id)"
         @dragstart="
-          dropStartOutV(
-            typeCon.type,
-            typeCon.baseinfo.alias,
-            typeCon.baseinfo.id
-          )
+          dropStartOutV(typeCon.type, typeCon.baseinfo.alias, typeCon.baseinfo.id)
         "
         draggable="true"
       >
@@ -90,8 +72,7 @@
             class="eqsignal"
             :class="[
               {
-                eqsignalno:
-                  typeCon.HDMI[0].sink[0].monitor.state.connected == false,
+                eqsignalno: typeCon.HDMI[0].sink[0].monitor.state.connected == false,
               },
             ]"
           ></div>
@@ -100,8 +81,7 @@
           <div class="imgbg">
             <div
               :class="{
-                imgbg_outV:
-                  typeCon.HDMI[0].sink[0].monitor.state.connected == true,
+                imgbg_outV: typeCon.HDMI[0].sink[0].monitor.state.connected == true,
                 imgbg_outV_nosig:
                   typeCon.HDMI[0].sink[0].monitor.state.connected == false,
               }"
@@ -125,7 +105,7 @@
         </div>
         <div class="eqcon">
           <p v-if="typeCon.showfbl">
-            {{displayvideoinfo}}
+            {{ displayvideoinfo }}
           </p>
           <p>
             {{
@@ -136,22 +116,16 @@
           </p>
           <p>
             {{
-              typeCon.HDMI[0].sink[0].config.hdcp_output_mode == "FOLLOW_SINK_1"
+              typeCon.HDMI[0].sink[0].config.hdcp_output_mode == "FOLLOW_SOURCE"
                 ? "跟随输入"
                 : "跟随输出"
             }}
           </p>
-          <div
-            class="btn_smallcircular eqset"
-            @click="openSetPage(typeCon)"
-          ></div>
+          <div class="btn_smallcircular eqset" @click="openSetPage(typeCon)"></div>
         </div>
       </div>
     </div>
-    <div
-      class="eqBoxOut"
-      v-if="typeCon.type == 'outV_all' || typeCon.type == 'outA_all'"
-    >
+    <div class="eqBoxOut" v-if="typeCon.type == 'outV_all' || typeCon.type == 'outA_all'">
       <div
         class="eqBoxIn"
         @dragover="dropOverOutVAll($event)"
@@ -197,10 +171,7 @@
             class="btn_smallcircular eqset"
             @click="openGroupV(typeCon.name, typeCon.typefrom, typeCon)"
           ></div>
-          <div
-            class="btn_smallcircular eqdel"
-            @click="delgroup(typeCon.name)"
-          ></div>
+          <div class="btn_smallcircular eqdel" @click="delgroup(typeCon.name)"></div>
         </div>
       </div>
     </div>
@@ -243,26 +214,15 @@
                 : "_" + typeCon.number_of_channels + "通道"
             }}
           </p>
-          <p
-            v-if="
-              typeCon.type == 'digitalinA' && typeCon.sampling_frequency != ''
-            "
-          >
+          <p v-if="typeCon.type == 'digitalinA' && typeCon.sampling_frequency != ''">
             采样频率：
             {{ typeCon.sampling_frequency / 1000 }}KHz
           </p>
-          <p
-            v-if="
-              typeCon.type == 'digitalinA' && typeCon.audio_encoding_type != ''
-            "
-          >
+          <p v-if="typeCon.type == 'digitalinA' && typeCon.audio_encoding_type != ''">
             音频编码方式：
             {{ typeCon.audio_encoding_type }}
           </p>
-          <div
-            class="btn_smallcircular eqset"
-            @click="openSetPage(typeCon)"
-          ></div>
+          <div class="btn_smallcircular eqset" @click="openSetPage(typeCon)"></div>
         </div>
       </div>
     </div>
@@ -303,25 +263,17 @@
         <div class="eqcon">
           <p v-if="typeCon.type == 'analogoutA'">接口类型：3.5模拟音频</p>
           <p v-if="typeCon.type == 'digitaloutA'">接口类型：HDMI</p>
-          <div
-            class="btn_smallcircular eqset"
-            @click="openSetPage(typeCon)"
-          ></div>
+          <div class="btn_smallcircular eqset" @click="openSetPage(typeCon)"></div>
         </div>
       </div>
     </div>
     <div class="eqBoxOut" v-if="typeCon.type == 'inU'">
       <div
         class="eqBoxIn"
-        @dragstart="
-          dropStartInU(typeCon.type, typeCon.USB.alias, typeCon.baseinfo.id)
-        "
+        @dragstart="dropStartInU(typeCon.type, typeCon.USB.alias, typeCon.baseinfo.id)"
         draggable="true"
       >
-        <div
-          class="eqtit"
-          :title="typeCon.baseinfo.alias + '-' + typeCon.USB.alias"
-        >
+        <div class="eqtit" :title="typeCon.baseinfo.alias + '-' + typeCon.USB.alias">
           {{ ellipconname(typeCon.baseinfo.alias + "-" + typeCon.USB.alias) }}
           <div class="eqsignal"></div>
         </div>
@@ -331,10 +283,7 @@
           </div>
         </div>
         <div class="eqcon">
-          <div
-            class="btn_smallcircular eqset"
-            @click="openSetPage(typeCon)"
-          ></div>
+          <div class="btn_smallcircular eqset" @click="openSetPage(typeCon)"></div>
         </div>
       </div>
     </div>
@@ -344,10 +293,7 @@
         @dragover="dropOverOutU($event)"
         @drop="dropOutU(typeCon.USB.alias, typeCon.baseinfo.id)"
       >
-        <div
-          class="eqtit"
-          :title="typeCon.baseinfo.alias + '-' + typeCon.USB.alias"
-        >
+        <div class="eqtit" :title="typeCon.baseinfo.alias + '-' + typeCon.USB.alias">
           {{ ellipconname(typeCon.baseinfo.alias + "-" + typeCon.USB.alias) }}
           <div class="eqsignal"></div>
         </div>
@@ -365,10 +311,7 @@
           <div class="eqimgcon eqimgoutU"></div>
         </div>
         <div class="eqcon">
-          <div
-            class="btn_smallcircular eqset"
-            @click="openSetPage(typeCon)"
-          ></div>
+          <div class="btn_smallcircular eqset" @click="openSetPage(typeCon)"></div>
         </div>
       </div>
     </div>
@@ -399,14 +342,8 @@
             {{ typeCon.Resolution.width }} * {{ typeCon.Resolution.height }}
           </p> -->
           <p>样式：{{ typeCon.row }}×{{ typeCon.column }}</p>
-          <div
-            class="btn_smallcircular eqset"
-            @click="openWallPage(typeCon)"
-          ></div>
-          <div
-            class="btn_smallcircular eqdel"
-            @click="delWall(typeCon.name)"
-          ></div>
+          <div class="btn_smallcircular eqset" @click="openWallPage(typeCon)"></div>
+          <div class="btn_smallcircular eqdel" @click="delWall(typeCon.name)"></div>
         </div>
       </div>
     </div>
@@ -430,14 +367,8 @@
               typeCon.output.fps
             }}Hz
           </p>
-          <div
-            class="btn_smallcircular eqset"
-            @click="openMultiPage(typeCon.name)"
-          ></div>
-          <div
-            class="btn_smallcircular eqdel"
-            @click="delMulti(typeCon.name)"
-          ></div>
+          <div class="btn_smallcircular eqset" @click="openMultiPage(typeCon.name)"></div>
+          <div class="btn_smallcircular eqdel" @click="delMulti(typeCon.name)"></div>
         </div>
       </div>
     </div>
@@ -453,16 +384,12 @@
         <div
           class="eqtit"
           :title="
-            typeCon.type == 'offline'
-              ? typeCon.id
-              : typeCon.id + '-' + typeCon.type
+            typeCon.type == 'offline' ? typeCon.id : typeCon.id + '-' + typeCon.type
           "
         >
           {{
             ellipconname(
-              typeCon.type == "offline"
-                ? typeCon.id
-                : typeCon.id + "-" + typeCon.type
+              typeCon.type == "offline" ? typeCon.id : typeCon.id + "-" + typeCon.type
             )
           }}
         </div>
@@ -486,40 +413,41 @@ export default {
       name: "1111",
       dropType: "",
       ghost: "",
+      grouptimer: null,
     };
   },
   watch: {},
   computed: {
-    hdcpstat:function() {
+    hdcpstat: function () {
       let status = this.typeCon.HDMI[0].source[0].info.signal.video.HDCPState;
-      if(status=="NONE"){
+      if (status == "NONE") {
         status = "HDCP_NONE";
-      }else{
-        let flag = status.match(/([a-z_]+)(\d)_(\d)/i)
-        if(flag.length==4){
-          status=`${flag[1]}${flag[2]}.${flag[3]}`
-        }else{
+      } else {
+        let flag = status.match(/([a-z_]+)(\d)_(\d)/i);
+        if (flag.length == 4) {
+          status = `${flag[1]}${flag[2]}.${flag[3]}`;
+        } else {
           status = "HDCP_NONE";
         }
       }
       return status;
     },
-    videoinfo:function () {
+    videoinfo: function () {
       let info = this.typeCon.HDMI[0].source[0].info.signal.video;
       let width = info.width;
       let height = info.height;
       let fps = info.frames_per_second;
-      let scan = info.scan_mode=="PROGRESSIVE"?"P":"I";
-      return `${width}*${height}${scan}@${fps}Hz`
+      let scan = info.scan_mode == "PROGRESSIVE" ? "P" : "I";
+      return `${width}*${height}${scan}@${fps}Hz`;
     },
-    displayvideoinfo:function () {
+    displayvideoinfo: function () {
       let info = this.typeCon.HDMI[0].sink[0].info.signal.video;
       let width = info.width;
       let height = info.height;
       let fps = info.frames_per_second;
-      let scan = info.scan_mode=="PROGRESSIVE"?"P":"I";
-      return `${width}*${height}${scan}@${fps}Hz` 
-    }
+      let scan = info.scan_mode == "PROGRESSIVE" ? "P" : "I";
+      return `${width}*${height}${scan}@${fps}Hz`;
+    },
   },
   methods: {
     ellipconname(value) {
@@ -527,9 +455,9 @@ export default {
         let len = value.length;
         if (!value) return "";
         if (len > 10) {
-          value  = value.substring(0, 3) + ".." + value.substring(len - 3, len);
+          value = value.substring(0, 3) + ".." + value.substring(len - 3, len);
         }
-        value  = value.replace(/\s/g,"\u3000");
+        value = value.replace(/\s/g, "\u3000");
         return value;
       }
     },
@@ -537,7 +465,7 @@ export default {
       this.$emit("delgroup", name);
     },
     openGroupV(name, from, data) {
-      console.log("打开组", name, from, data);
+      // console.log(`${Date.now()}`);
       let aodata = {
         command: {
           type: "get",
@@ -549,20 +477,25 @@ export default {
         },
       };
       let that = this;
+
       that.$store.state.groupMsg = data;
       let deviceinGroup = [];
       let deviceoutGroup = [];
       let groupMsg = data.Device;
       let devicearr = that.$store.state.deviceInfo.device;
+      console.log(`jifukui`);
+      console.dir(devicearr);
       for (let i = 0; i < devicearr.length; i++) {
         if (devicearr[i].baseinfo.type == 1) {
-          if (groupMsg.indexOf(devicearr[i].baseinfo.id) != -1) {
-            deviceinGroup.push(devicearr[i]);
-          } else {
-            deviceoutGroup.push(devicearr[i]);
-          }
+          // if (groupMsg.indexOf(devicearr[i].baseinfo.id) != -1) {
+          //   deviceinGroup.push(devicearr[i]);
+          // } else {
+          //   deviceoutGroup.push(devicearr[i]);
+          // }
+          deviceoutGroup.push(devicearr[i]);
         }
       }
+      console.dir(deviceoutGroup);
       let audiogroup = data.Device;
       let audioOut = that.$store.state.audioOut;
       let deviceoutGroupA = [];
@@ -592,18 +525,26 @@ export default {
       }
       that.$store.state.groupMsgA = JSON.parse(JSON.stringify(deviceinGroupA));
       that.$store.state.groupMsgAname = name;
+
+      this.grouptimer = setTimeout(that.openGroupV, 3000, name, from, data);
+      console.log(`the timer is ${this.grouptimer}`);
       if (from == "outV_group") {
         that.$store.state.groupPageV = true;
-        that.$emit("group-ptopv", [deviceinGroup, deviceoutGroup, name]);
-        console.log("子组件传值给父组件ptopv");
+        that.$emit("group-ptopv", [deviceinGroup, deviceoutGroup, name, that.grouptimer]);
+        // console.log("子组件传值给父组件ptopv");
       } else if (from == "outA_group") {
         that.$store.state.groupPageA = true;
-        that.$emit("group-ptopa", [deviceinGroupA, deviceoutGroupA, name]);
-        console.log("子组件传值给父组件ptopa");
+        that.$emit("group-ptopa", [
+          deviceinGroupA,
+          deviceoutGroupA,
+          name,
+          that.grouptimer,
+        ]);
+        // console.log("子组件传值给父组件ptopa");
       } else if (from == "multi_group") {
         that.$store.state.groupPageMulti = true;
-        that.$emit("group-multi", [deviceinGroup, deviceoutGroup, name]);
-        console.log("子组件传值给父组件multi");
+        that.$emit("group-multi", [deviceinGroup, deviceoutGroup, name, that.grouptimer]);
+        // console.log("子组件传值给父组件multi");
       }
     },
     openMultiPage(name) {
@@ -649,10 +590,7 @@ export default {
       );
     },
     dropOverOutV(ev) {
-      if (
-        this.$store.state.dropType == "inV" ||
-        this.$store.state.dropType == "multi"
-      ) {
+      if (this.$store.state.dropType == "inV" || this.$store.state.dropType == "multi") {
         ev.preventDefault();
       }
     },
@@ -774,7 +712,6 @@ export default {
 
         let arr = [];
         let audioOut = that.$store.state.audioOut;
-        console.log(audioOut);
         for (let i = 0; i < audioOut.length; i++) {
           if (that.$store.state.dropType == "digitalinA") {
             intype = "HDMI_AUDIO";
@@ -1049,7 +986,6 @@ export default {
           },
         },
       };
-      console.log(aodata);
       this.$axios.post("api/device/sdvoe", aodata).then(function (res) {
         if (res.data.status == "SUCCESS") {
           notification.success({
@@ -1180,11 +1116,7 @@ export default {
         data.type == "wallinV"
       ) {
         let id;
-        if (
-          data.type == "inV" ||
-          data.type == "multiinV" ||
-          data.type == "wallinV"
-        ) {
+        if (data.type == "inV" || data.type == "multiinV" || data.type == "wallinV") {
           id = data.baseinfo.id;
         } else {
           id = data.id;
@@ -1289,7 +1221,6 @@ export default {
       });
     },
     leavestreamA(con) {
-      console.log(con);
       let type;
       if (con.type == "digitaloutA") {
         type = "HDMI_AUDIO";
@@ -1323,7 +1254,6 @@ export default {
       });
     },
     leavestreamU(con) {
-      console.log(con);
       let aodata = {
         command: {
           type: "set",
@@ -1357,8 +1287,13 @@ export default {
       this.$emit("delmulti", name);
     },
   },
-  created() {},
+  created() {
+    console.log(`I have created`);
+  },
   mounted() {},
+  beforeUnmount() {
+    console.log(`I have quit`);
+  },
 };
 </script>
 <style scoped>
@@ -1386,10 +1321,7 @@ export default {
 .eqtit {
   height: 30px;
   width: 100%;
-  background: -webkit-linear-gradient(
-    rgba(250, 250, 250, 1) 25%,
-    rgba(210, 210, 210, 1)
-  );
+  background: -webkit-linear-gradient(rgba(250, 250, 250, 1) 25%, rgba(210, 210, 210, 1));
   text-align: center;
   line-height: 30px;
   color: #333;
@@ -1546,10 +1478,7 @@ export default {
 .eqcon {
   height: 100px;
   width: 100%;
-  background: -webkit-linear-gradient(
-    rgba(250, 250, 250, 1) 25%,
-    rgba(210, 210, 210, 1)
-  );
+  background: -webkit-linear-gradient(rgba(250, 250, 250, 1) 25%, rgba(210, 210, 210, 1));
   border-radius: 0 0 10px 10px;
   padding: 5px;
   position: relative;

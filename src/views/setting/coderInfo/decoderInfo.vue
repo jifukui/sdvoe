@@ -613,6 +613,9 @@ export default {
           break;
       }
       if (that.modeselect != "帧同步") {
+        that.decoderInfo.HDMI[0].subscript[0].config.output.fps = Math.floor(
+          that.decoderInfo.HDMI[0].subscript[0].config.output.fps + 0.5
+        );
         that.fblselect =
           that.decoderInfo.HDMI[0].subscript[0].config.output.width +
           "×" +
@@ -1043,13 +1046,6 @@ export default {
           mode = "fastswitch stretch";
           break;
       }
-      console.log(
-        mode,
-        this.decoderInfo.HDMI[0].subscript[0].config.p2pmode,
-        this.fblselect,
-        this.decoderInfo.fblselect,
-        "-----22222222222"
-      );
       if (
         mode != this.decoderInfo.HDMI[0].subscript[0].config.p2pmode ||
         this.fblselect != this.decoderInfo.fblselect ||
