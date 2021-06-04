@@ -161,10 +161,8 @@ export default {
       }
     },
     closeGroupV() {
-      console.log("I have closed");
-      console.log(`the timer is ${this.grouptimer}`);
       clearTimeout(this.grouptimer);
-      console.log(`the timer is ${this.grouptimer}`);
+      this.grouptimer = null;
       let that = this;
       let arr = [];
       for (let i = 0; i < that.outVConG2.length; i++) {
@@ -591,6 +589,9 @@ export default {
       this.offlinede = [];
       this.outVConG1 = data[0];
       this.outVConG2 = data[1];
+      // console.log("jifukui ");
+      // console.dir(this.outVConG1);
+      // console.dir(this.outVConG2);
       let arr = [];
       for (let j = 0; j < this.outVConG2.length; j++) {
         arr.push(this.outVConG2[j].baseinfo.id);
@@ -684,6 +685,7 @@ export default {
           }
         }
       }
+
       this.outVConG1 = arr1;
       this.outVConG2 = arr2;
     },
@@ -707,6 +709,9 @@ export default {
   },
   beforeUnmount() {
     clearInterval(this.timer);
+    if (this.grouptimer) {
+      clearTimeout(this.grouptimer);
+    }
   },
   beforeRouteLeave(to, from, next) {
     if (this.$store.state.groupPageV) {

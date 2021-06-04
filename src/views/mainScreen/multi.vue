@@ -21,10 +21,7 @@
       </div>
       <div class="cardli">
         <div class="btn_normalsquare cardbtn" @click="cancelCard()">取消</div>
-        <div
-          class="btn_normalsquare cardbtn"
-          @click="createMulti(row, column, true)"
-        >
+        <div class="btn_normalsquare cardbtn" @click="createMulti(row, column, true)">
           确定
         </div>
       </div>
@@ -45,19 +42,11 @@
         >
           <template v-slot:footer>
             <a-button key="back" @click="addmultiCancel"> 取消 </a-button>
-            <a-button key="submit" type="primary" @click="addmultiSet">
-              确定
-            </a-button>
+            <a-button key="submit" type="primary" @click="addmultiSet"> 确定 </a-button>
           </template>
           <div class="grouptit1">
             <p>多画面名称：</p>
-            <input
-              type="text"
-              name=""
-              id=""
-              class="input_small"
-              v-model="addmultiname"
-            />
+            <input type="text" name="" id="" class="input_small" v-model="addmultiname" />
           </div>
         </a-modal>
         <div
@@ -89,26 +78,14 @@
         >
           <template v-slot:footer>
             <a-button key="back" @click="addgroupCancel"> 取消 </a-button>
-            <a-button key="submit" type="primary" @click="addgroupSet">
-              确定
-            </a-button>
+            <a-button key="submit" type="primary" @click="addgroupSet"> 确定 </a-button>
           </template>
           <div class="grouptit">
             <p>组名：</p>
-            <input
-              type="text"
-              name=""
-              id=""
-              class="input_small"
-              v-model="addgroupname"
-            />
+            <input type="text" name="" id="" class="input_small" v-model="addgroupname" />
           </div>
           <ul class="groupul">
-            <li
-              v-for="(item, index) in groupcheck"
-              :key="index"
-              class="groupli"
-            >
+            <li v-for="(item, index) in groupcheck" :key="index" class="groupli">
               <p>{{ item.name }}</p>
               <input type="checkbox" name="" id="" v-model="item.check" />
             </li>
@@ -157,9 +134,7 @@
                 <div class="viewAll">
                   <div
                     v-if="leftIndex == 0"
-                    :style="
-                      'width:' + allwidth + 'px;height:' + allheight + 'px'
-                    "
+                    :style="'width:' + allwidth + 'px;height:' + allheight + 'px'"
                   >
                     <div
                       class="boxOne"
@@ -837,13 +812,7 @@
             </div>
             <div class="multiname">
               <h2>名称</h2>
-              <input
-                class="input_small"
-                type="text"
-                name=""
-                id=""
-                v-model="multiName"
-              />
+              <input class="input_small" type="text" name="" id="" v-model="multiName" />
             </div>
             <div class="multiStyle">
               <h2>样式</h2>
@@ -903,21 +872,12 @@
                   {{ item }}
                 </option>
               </select>
-              <div
-                class="btn_normalsquare yulan"
-                @click="setMulti(1)"
-                v-show="yulanshow"
-              >
+              <div class="btn_normalsquare yulan" @click="setMulti(1)" v-show="yulanshow">
                 预览
               </div>
-              <div class="btn_normalsquare shezhi" @click="setMulti(2)">
-                设置
-              </div>
+              <div class="btn_normalsquare shezhi" @click="setMulti(2)">设置</div>
             </div>
-            <div
-              class="btn_bigcircular multireturn"
-              @click="closeMultiPage()"
-            ></div>
+            <div class="btn_bigcircular multireturn" @click="closeMultiPage()"></div>
           </div>
         </div>
       </div>
@@ -967,10 +927,7 @@
         <div class="groupBottom" :style="'padding-left:' + eqIntervalR + 'px'">
           <div class="btn_bigsquare" @click="addAll()">添加所有输出</div>
           <div class="btn_bigsquare" @click="delAll()">删除所有输出</div>
-          <div
-            class="btn_bigcircular return_btn"
-            @click="closeGroupMulti()"
-          ></div>
+          <div class="btn_bigcircular return_btn" @click="closeGroupMulti()"></div>
         </div>
       </div>
     </div>
@@ -1079,6 +1036,7 @@ export default {
       showinV: [],
       offlinede: [],
       modeselected: 0,
+      grouptimer: null,
     };
   },
   watch: {
@@ -1099,6 +1057,8 @@ export default {
       }
     },
     closeGroupMulti() {
+      clearTimeout(this.grouptimer);
+      this.grouptimer = null;
       let that = this;
       let arr = [];
       for (let i = 0; i < that.outVConG2.length; i++) {
@@ -1483,30 +1443,22 @@ export default {
                 that.ptopout++;
                 deviceInfo[i].type = "outV";
                 deviceInfo[i].contenttype = "";
-                deviceInfo[i].output =
-                  deviceInfo[i].HDMI[0].subscript[0].config.output;
+                deviceInfo[i].output = deviceInfo[i].HDMI[0].subscript[0].config.output;
                 if (deviceInfo[i].HDMI[0].subscript[0].config.mode === null) {
                   let conid = deviceInfo[i].HDMI[0].subscript[0].config.mac;
                   if (conid === null) {
                     deviceInfo[i].contenttype = "";
-                    if (
-                      deviceInfo[i].HDMI[0].subscript[0].config.p2pmode ==
-                      "genlock"
-                    ) {
+                    if (deviceInfo[i].HDMI[0].subscript[0].config.p2pmode == "genlock") {
                       deviceInfo[i].showfbl = false;
                     } else {
                       deviceInfo[i].showfbl = true;
                     }
                   } else {
-                    if (
-                      deviceInfo[i].HDMI[0].subscript[0].config.p2pmode ==
-                      "genlock"
-                    ) {
+                    if (deviceInfo[i].HDMI[0].subscript[0].config.p2pmode == "genlock") {
                       for (let j = 0; j < deviceInfo.length; j++) {
                         if (conid == deviceInfo[j].baseinfo.id) {
                           deviceInfo[i].contenttype = "inV";
-                          deviceInfo[i].contentname =
-                            deviceInfo[j].baseinfo.alias;
+                          deviceInfo[i].contentname = deviceInfo[j].baseinfo.alias;
                           if (
                             deviceInfo[j].HDMI[0].source[0].info.signal.video
                               .signalstate == true
@@ -1526,8 +1478,7 @@ export default {
                       for (let j = 0; j < deviceInfo.length; j++) {
                         if (conid == deviceInfo[j].baseinfo.id) {
                           deviceInfo[i].contenttype = "inV";
-                          deviceInfo[i].contentname =
-                            deviceInfo[j].baseinfo.alias;
+                          deviceInfo[i].contentname = deviceInfo[j].baseinfo.alias;
                         }
                       }
                     }
@@ -1538,10 +1489,8 @@ export default {
                   deviceInfo[i].contenttype = "wall";
                   deviceInfo[i].contentname =
                     deviceInfo[i].HDMI[0].subscript[0].config.template;
-                  deviceInfo[i].output =
-                    deviceInfo[i].HDMI[0].sink[0].info.signal.video;
-                  deviceInfo[i].output.fps =
-                    deviceInfo[i].output.frames_per_second;
+                  deviceInfo[i].output = deviceInfo[i].HDMI[0].sink[0].info.signal.video;
+                  deviceInfo[i].output.fps = deviceInfo[i].output.frames_per_second;
                   deviceInfo[i].showfbl = true;
                 } else if (
                   deviceInfo[i].HDMI[0].subscript[0].config.mode === "multiview"
@@ -1695,12 +1644,11 @@ export default {
       });
     },
     openGroup(data) {
-      // console.log("111111111111", data, this.$store.state.groupMsg);
       let grouparr = this.$store.state.groupMsg.Device;
-
+      this.grouptimer = data[3];
       this.offlinede = [];
       this.outVConG1 = data[1];
-      this.outVConG2 = data[0];
+      this.outVConG2 = data[1];
       let arr = [];
       for (let j = 0; j < this.outVConG2.length; j++) {
         arr.push(this.outVConG2[j].baseinfo.id);
@@ -2103,10 +2051,7 @@ export default {
       }
       let len = 0;
       for (let i = 0; i < this.multiName.length; i++) {
-        if (
-          this.multiName.charCodeAt(i) > 127 ||
-          this.multiName.charCodeAt(i) == 94
-        ) {
+        if (this.multiName.charCodeAt(i) > 127 || this.multiName.charCodeAt(i) == 94) {
           len += 2;
         } else {
           len++;
@@ -2157,10 +2102,8 @@ export default {
             for (let i = 0; i < deviceInfo.length; i++) {
               if (deviceInfo[i].baseinfo.type == 1) {
                 if (
-                  deviceInfo[i].HDMI[0].subscript[0].config.mode ==
-                    "multiview" &&
-                  deviceInfo[i].HDMI[0].subscript[0].config.template ==
-                    that.multiName
+                  deviceInfo[i].HDMI[0].subscript[0].config.mode == "multiview" &&
+                  deviceInfo[i].HDMI[0].subscript[0].config.template == that.multiName
                 ) {
                   outarr.push(deviceInfo[i].baseinfo.id);
                 }
@@ -2375,6 +2318,9 @@ export default {
   },
   beforeUnmount() {
     clearInterval(this.timer);
+    if (this.grouptimer) {
+      clearTimeout(this.grouptimer);
+    }
   },
   beforeRouteLeave(to, from, next) {
     let that = this;
@@ -2639,10 +2585,7 @@ export default {
 .card {
   height: 180px;
   width: 260px;
-  background: -webkit-linear-gradient(
-    rgba(250, 250, 250, 1) 25%,
-    rgba(210, 210, 210, 1)
-  );
+  background: -webkit-linear-gradient(rgba(250, 250, 250, 1) 25%, rgba(210, 210, 210, 1));
   border-radius: 10px;
   position: absolute;
   left: 50%;

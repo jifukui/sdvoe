@@ -178,8 +178,8 @@ export default {
       return true;
     },
     closeGroupA() {
-      console.log("I want to close");
       clearTimeout(this.grouptimer);
+      this.grouptimer = null;
       let that = this;
       let arr = [];
       for (let i = 0; i < that.outAConG2.length; i++) {
@@ -588,7 +588,7 @@ export default {
           },
         },
       };
-      console.log(aodata);
+      // console.log(aodata);
       this.$axios.post("api/device/sdvoe", aodata).then(function (res) {
         if (res.data.status == "SUCCESS") {
           notification.success({
@@ -622,7 +622,7 @@ export default {
         }
       }
       this.groupname = data[2].slice(6);
-      console.log(arr, this.offlinede);
+      // console.log(arr, this.offlinede);
     },
     dropOverGroupA1(ev) {
       ev.preventDefault();
@@ -755,6 +755,9 @@ export default {
   },
   beforeUnmount() {
     clearInterval(this.timer);
+    if (this.grouptimer) {
+      clearTimeout(this.grouptimer);
+    }
   },
   beforeRouteLeave(to, from, next) {
     let that = this;
