@@ -45,23 +45,9 @@
       </div>
     </div>
     <div class="navset">
-      <div
-        class="btn_scene headerBtn_1"
-        v-if="pagevalue != 1"
-        @click="pageTo(1)"
-      >
-        <!-- <img src="@/assets/demo17.png" /> -->
-      </div>
-      <div
-        class="btn_scene headerBtn_2"
-        v-if="pagevalue != 2"
-        @click="pageTo(2)"
-      ></div>
-      <div
-        class="btn_scene headerBtn_3"
-        v-if="pagevalue != 3"
-        @click="pageTo(3)"
-      ></div>
+      <!-- <div class="btn_scene headerBtn_1" v-if="pagevalue != 1" @click="pageTo(1)"></div> -->
+      <div class="btn_scene" v-bind:class="btn2" @click="systemInfoBtn"></div>
+      <div class="btn_scene" v-bind:class="btn3" @click="companyInfoBtn"></div>
       <div class="btn_scene headerBtn_4" @click.stop="adminover()"></div>
     </div>
     <div class="line"></div>
@@ -78,24 +64,58 @@ export default {
       scenearr: ["场景1111111", "场景2", "场景3"],
       adminset: false,
       ptopvalue: "V",
+      path: { path: "/views/mainscreen/ptop/ptopV", query: {} },
+      btn2: "headerBtn_2",
+      btn3: "headerBtn_3",
     };
   },
   watch: {
-    $route(to, from) {
-      let pagepath = to.path.split("/")[2];
-      switch (pagepath) {
-        case "mainscreen":
-          this.pagevalue = 1;
+    pagevalue(value, old) {
+      console.log(`the new value is ${value} and old is ${old}`);
+      switch (value) {
+        case 1:
+          this.btn2 = "headerBtn_2";
+          this.btn3 = "headerBtn_3";
+          this.$router.push(this.path);
           break;
-        case "setting":
-          this.pagevalue = 2;
+        case 2:
+          this.btn2 = "headerBtn_1";
+          this.btn3 = "headerBtn_3";
+          this.$router.push({ path: "/views/setting" });
           break;
-        case "about":
-          this.pagevalue = 3;
+        case 3:
+          this.btn2 = "headerBtn_2";
+          this.btn3 = "headerBtn_1";
+          this.$router.push({ path: "/views/about" });
+          break;
+        default:
           break;
       }
+    },
+    $route(to, from) {
+      console.log(`the deivce is ${this.pagevalue}`);
+      // let pagepath = to.path.split("/")[2];
+      if (this.pagevalue == 1) {
+        console.log("jifukui record");
+        let { path, query } = to;
+        this.path = { path, query };
+      }
+
+      // console.log(`the value is ${this.pagevalue}`);
+      // switch (pagepath) {
+      //   case "mainscreen":
+      //     this.pagevalue = 1;
+      //     break;
+      //   case "setting":
+      //     this.pagevalue = 2;
+      //     this.path = { path, query };
+      //     break;
+      //   case "about":
+      //     this.pagevalue = 3;
+      //     this.path = { path, query };
+      //     break;
+      // }
       let mainvalue = this.$route.path.split("/")[3];
-      console.log(mainvalue);
       switch (mainvalue) {
         case "ptop":
           this.screenvalue = 1;
@@ -123,9 +143,10 @@ export default {
   },
   methods: {
     pageTo(value) {
+      console.log(`page switcher ${value}`);
       switch (value) {
         case 1:
-          this.$router.push({ path: "/views/mainscreen" });
+          this.$router.push(this.path);
           break;
         case 2:
           this.$router.push({ path: "/views/setting" });
@@ -138,6 +159,22 @@ export default {
       this.$store.state.encoderPage = false;
       this.$store.state.decoderPage = false;
       this.$store.state.usbsetPage = false;
+    },
+    systemInfoBtn() {
+      if (this.pagevalue != 2) {
+        this.pagevalue = 2;
+      } else {
+        this.pagevalue = 1;
+      }
+      console.log("system");
+    },
+    companyInfoBtn() {
+      if (this.pagevalue != 3) {
+        this.pagevalue = 3;
+      } else {
+        this.pagevalue = 1;
+      }
+      console.log("company");
     },
     switchType(value) {
       this.screenvalue = value;
@@ -207,7 +244,6 @@ export default {
         break;
     }
     let ptopvalue = this.$route.path.split("/")[4];
-    console.log(ptopvalue);
     switch (ptopvalue) {
       case "ptopV":
         this.ptopvalue = "V";

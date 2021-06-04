@@ -107,8 +107,8 @@ const router = createRouter({
   // mode: "history"
 })
 router.beforeEach((to, from, next) => {
-  console.log(to)
-  console.log(from);
+  // console.log(to)
+  // console.log(from);
   next();
 })
 export default router
