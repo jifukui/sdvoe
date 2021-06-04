@@ -667,10 +667,11 @@ export default {
       this.getdevice();
     },
     closeEnPage() {
-      this.$router.replace({
-        path: "/views/setting/coderInfo",
-        query: { item: 1 },
-      });
+      // this.$router.replace({
+      //   path: "/views/setting/coderInfo",
+      //   query: { item: 1 },
+      // });
+      this.$router.back();
     },
     switchCoder(num) {
       if (num == 33) {

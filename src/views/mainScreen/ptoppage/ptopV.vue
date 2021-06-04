@@ -325,7 +325,6 @@ export default {
       this.cleangroup();
     },
     dropoutgroupV() {
-      console.log("fromid", this.$store.state.fromid);
       for (let i = 0; i < this.outVConG2.length; i++) {
         if (this.$store.state.fromid == this.outVConG2[i].baseinfo.id) {
           this.outVConG1.push(this.outVConG2[i]);
@@ -589,9 +588,6 @@ export default {
       this.offlinede = [];
       this.outVConG1 = data[0];
       this.outVConG2 = data[1];
-      // console.log("jifukui ");
-      // console.dir(this.outVConG1);
-      // console.dir(this.outVConG2);
       let arr = [];
       for (let j = 0; j < this.outVConG2.length; j++) {
         arr.push(this.outVConG2[j].baseinfo.id);
@@ -619,7 +615,6 @@ export default {
           },
         },
       };
-      console.log(aodata);
       Modal.confirm({
         title: "是否删除组-" + data.slice(6) + "?",
         okText: "确定",
@@ -714,6 +709,7 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
+    console.log("I have leave");
     if (this.$store.state.groupPageV) {
       let that = this;
       let arr = [];

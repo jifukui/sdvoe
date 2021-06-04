@@ -34,7 +34,8 @@ export default createStore({
     openPageAvalue: "",
     codertopagedevice: "",
     upgradePage: false,
-    Jmask: false
+    Jmask: false,
+    Jrouter: null
   },
   mutations: {},
   actions: {},

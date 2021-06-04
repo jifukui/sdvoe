@@ -537,7 +537,6 @@ export default {
 
         this.$axios.post("api/device/sdvoe", aodata1).then(function (res) {
           if (res.data.status == "SUCCESS") {
-            console.log(`good reboot`);
           } else {
             notification.error({
               message: "重启失败",
@@ -663,10 +662,14 @@ export default {
       this.getdevice();
     },
     closeEnPage() {
-      this.$router.push({
-        path: "/views/setting/coderInfo",
-        query: { item: 1 },
-      });
+      // this.$router.push({
+      //   path: "/views/setting/coderInfo",
+      //   query: { item: 1 },
+      // });
+      // this.$router.push({
+      //   path:this.$s
+      // })
+      this.$router.back();
     },
     switchCoder(num) {
       if (num == 33) {

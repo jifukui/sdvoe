@@ -20,83 +20,84 @@ import ENInfo from '../views/setting/ENInfo.vue'
 import Encoder from '../views/setting/coderInfo/encoderInfo.vue'
 import Decoder from '../views/setting/coderInfo/decoderInfo.vue'
 import USBset from '../views/setting/USBInfo/USBset.vue'
+
 const routes = [{
   path: '/',
   component: IndexHtml,
   redirect: '/views/mainscreen',
   children: [{
-      path: '/views/mainscreen',
-      component: MainScreen,
-      redirect: '/views/mainscreen/ptop',
+    path: '/views/mainscreen',
+    component: MainScreen,
+    redirect: '/views/mainscreen/ptop',
+    children: [{
+      path: '/views/mainscreen/ptop',
+      component: Ptop,
+      redirect: '/views/mainscreen/ptop/ptopV',
       children: [{
-          path: '/views/mainscreen/ptop',
-          component: Ptop,
-          redirect: '/views/mainscreen/ptop/ptopV',
-          children: [{
-              path: '/views/mainscreen/ptop/ptopV',
-              component: PtopV,
-            },
-            {
-              path: '/views/mainscreen/ptop/ptopA',
-              component: PtopA,
-            },
-            {
-              path: '/views/mainscreen/ptop/ptopUSB',
-              component: PtopUSB,
-            }
-          ]
-        },
-        {
-          path: '/views/mainscreen/multi',
-          component: Multi
-        },
-        {
-          path: '/views/mainscreen/wall',
-          component: Wall
-        }
+        path: '/views/mainscreen/ptop/ptopV',
+        component: PtopV,
+      },
+      {
+        path: '/views/mainscreen/ptop/ptopA',
+        component: PtopA,
+      },
+      {
+        path: '/views/mainscreen/ptop/ptopUSB',
+        component: PtopUSB,
+      }
       ]
     },
     {
-      path: '/views/setting',
-      component: Setting,
-      redirect: '/views/setting/systemInfo',
-      children: [{
-          path: '/views/setting/systemInfo',
-          component: SystemInfo
-        },
-        {
-          path: '/views/setting/coderInfo',
-          component: CoderInfo
-        },
-        {
-          path: '/views/setting/EDIDInfo',
-          component: EDIDInfo
-        },
-        {
-          path: '/views/setting/USBInfo',
-          component: USBInfo
-        },
-        {
-          path: '/views/setting/ENInfo',
-          component: ENInfo
-        }
-      ]
+      path: '/views/mainscreen/multi',
+      component: Multi
     },
     {
-      path: '/views/about',
-      component: About,
-
-    },
-    {
-      path: '/views/decoder',
-      component: Decoder
-    }, {
-      path: '/views/encoder',
-      component: Encoder
-    }, {
-      path: '/views/usbset',
-      component: USBset
+      path: '/views/mainscreen/wall',
+      component: Wall
     }
+    ]
+  },
+  {
+    path: '/views/setting',
+    component: Setting,
+    redirect: '/views/setting/systemInfo',
+    children: [{
+      path: '/views/setting/systemInfo',
+      component: SystemInfo
+    },
+    {
+      path: '/views/setting/coderInfo',
+      component: CoderInfo
+    },
+    {
+      path: '/views/setting/EDIDInfo',
+      component: EDIDInfo
+    },
+    {
+      path: '/views/setting/USBInfo',
+      component: USBInfo
+    },
+    {
+      path: '/views/setting/ENInfo',
+      component: ENInfo
+    }
+    ]
+  },
+  {
+    path: '/views/about',
+    component: About,
+
+  },
+  {
+    path: '/views/decoder',
+    component: Decoder
+  }, {
+    path: '/views/encoder',
+    component: Encoder
+  }, {
+    path: '/views/usbset',
+    component: USBset
+  }
   ]
 }]
 
@@ -105,5 +106,9 @@ const router = createRouter({
   routes,
   // mode: "history"
 })
-
+router.beforeEach((to, from, next) => {
+  console.log(to)
+  console.log(from);
+  next();
+})
 export default router

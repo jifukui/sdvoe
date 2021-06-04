@@ -1107,6 +1107,7 @@ export default {
       this.$store.state.fromname = name;
     },
     openSetPage(data) {
+      console.log(`start jump`);
       this.$store.state.openPageAvalue = data.type;
       if (
         data.type == "inV" ||
@@ -1121,12 +1122,10 @@ export default {
         } else {
           id = data.id;
         }
-        console.log("tiaozhuanid", id);
         this.$store.state.coderID = id;
         this.$store.state.codertopagedevice = this.$store.state.deviceInfo.device;
         for (let i = 0; i < this.$store.state.deviceInfo.device.length; i++) {
           if (id == this.$store.state.deviceInfo.device[i].baseinfo.id) {
-            console.log("tiaozhuan", this.$store.state.deviceInfo.device[i]);
             this.$store.state.coderMsg = this.$store.state.deviceInfo.device[i];
           }
         }
@@ -1176,7 +1175,6 @@ export default {
           },
         },
       };
-      console.log(aodata);
       this.$axios.post("api/device/sdvoe", aodata).then(function (res) {
         if (res.data.status == "SUCCESS") {
           that.$emit("setafv", [id, state]);
@@ -1288,7 +1286,7 @@ export default {
     },
   },
   created() {
-    console.log(`I have created`);
+    // console.log(`I have created`);
   },
   mounted() {},
   beforeUnmount() {
