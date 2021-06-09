@@ -49,13 +49,27 @@
               >
                 默认4K60
               </div>
+              <div
+                class="edidDefault"
+                @click="edidfile()"
+                :class="{
+                  edid_click: fromSelectType == 0 && defaultvalue == 2,
+                }"
+              >
+                本地文件
+                <input
+                  type="file"
+                  id="file"
+                  @change="fileChnage()"
+                  @click="readFromFile()"
+                  style="display: none"
+                />
+              </div>
             </div>
             <div class="edid_c">
               <div class="edid_l_tit">
                 简要
-                <div class="btn_smallsquare ediddownload" @click="ediddownload">
-                  下载
-                </div>
+                <div class="btn_smallsquare ediddownload" @click="ediddownload">下载</div>
               </div>
               <div class="edid_c_con">
                 <span class="errmsg" v-show="!edidread" :title="ediderr">{{
@@ -86,11 +100,7 @@
               <div class="edid_l_tit">
                 拷贝到
                 <div class="edidck">
-                  <input
-                    type="checkbox"
-                    v-model="allcheck"
-                    @change="checkAll()"
-                  />
+                  <input type="checkbox" v-model="allcheck" @change="checkAll()" />
                   全选
                 </div>
               </div>
@@ -140,6 +150,7 @@ export default {
       tonamearr: [],
       invalue: 0,
       firstdeviceInfo: [],
+      fileInfo: {},
     };
   },
   watch: {},
@@ -322,6 +333,55 @@ export default {
           }
         });
       }
+    },
+    readFromFile() {
+      console.log("the file have info");
+    },
+    fileChnage() {
+      console.log("the file have changed");
+
+      let file = document.getElementById("file").files[0];
+      console.dir(file);
+      if (!/.edid$/i.test(file.name)) {
+        notification.error({
+          message: "文件类型错误",
+          duration: 1,
+        });
+        return;
+      }
+      if (file.size % 128) {
+        notification.error({
+          message: "文件大小错误",
+          duration: 1,
+        });
+        return;
+      }
+      var reader;
+      let that = this;
+      reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onprogress = function () {};
+      reader.onload = function () {
+        let aByte, byteStr;
+        let result = new Uint8Array(reader.result);
+        let edidText = "";
+        for (let n = 0; n < result.length; ++n) {
+          aByte = result[n];
+          byteStr = aByte.toString(16);
+          if (byteStr.length < 2) {
+            byteStr = "0" + byteStr;
+          }
+          edidText += byteStr;
+        }
+        that.fromSelectType = 0;
+        that.defaultvalue = 2;
+        that.fromname = file.name;
+        that.edidnow = edidText;
+        that.handleEDID(edidText);
+      };
+      reader.onerror = function () {
+        console.log("have error");
+      };
     },
     edidfile() {
       document.getElementById("file").click();

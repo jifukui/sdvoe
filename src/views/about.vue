@@ -3,10 +3,15 @@
     <div class="aboutpage">
       <div class="msgConT">
         <h1>可视化平台</h1>
-        <h2>
-          集矩阵、拼接、KVM坐席、中控、传输、储存、录播于一体的可视化交互管理系统
-        </h2>
-        <div class="msgConTimg">图片</div>
+        <h2>集矩阵、拼接、KVM坐席、中控、传输、储存、录播于一体的可视化交互管理系统</h2>
+        <div class="msgConTimg">
+          <img
+            class="jiimg"
+            src="/img/liguo.png"
+            alt="利国分布式方案"
+            title="北京市利国电子技术有限公司分布式方案"
+          />
+        </div>
       </div>
       <div class="switchCon">
         <div
@@ -34,7 +39,14 @@
             </h2>
           </div>
           <div class="pageCon1R">
-            <div>图片</div>
+            <div>
+              <img
+                class="jiimg"
+                src="/img/encoder.png"
+                alt="SDVOE设备图片"
+                title="北京市利国电子技术有限公司"
+              />
+            </div>
           </div>
         </div>
         <div class="btn_normalsquare btn downloadBtn">下载说明书</div>
@@ -43,11 +55,25 @@
         <h1 class="page2tit">设备节点</h1>
         <div class="pageCon2">
           <div class="pageCon2L">
-            <div class="pageConimg" @click="showEn()">图片</div>
+            <div class="pageConimg" @click="showEn()">
+              <img
+                class="jiimg"
+                src="/img/encoder.png"
+                alt="编码器设备"
+                title="编码器设备"
+              />
+            </div>
             <h2>编码设备</h2>
           </div>
           <div class="pageCon2R">
-            <div class="pageConimg" @click="showDe()">图片</div>
+            <div class="pageConimg" @click="showDe()">
+              <img
+                class="jiimg"
+                src="/img/decoder.png"
+                alt="解码器设备"
+                title="解码器设备"
+              />
+            </div>
             <h2>解码设备</h2>
           </div>
         </div>
@@ -60,7 +86,14 @@
             <h2>编码设备简介</h2>
           </div>
           <div class="pageCon1R">
-            <div>图片</div>
+            <div>
+              <img
+                class="jiimg"
+                src="/img/encoder.png"
+                alt="编码器设备"
+                title="编码器设备"
+              />
+            </div>
           </div>
         </div>
         <div class="btn_normalsquare btn downloadBtn">下载说明书</div>
@@ -106,7 +139,14 @@
             <h2>解码设备简介</h2>
           </div>
           <div class="pageCon1R">
-            <div>图片</div>
+            <div>
+              <img
+                class="jiimg"
+                src="/img/encoder.png"
+                alt="编码器设备"
+                title="编码器设备"
+              />
+            </div>
           </div>
         </div>
         <div class="btn_normalsquare btn downloadBtn">下载说明书</div>
@@ -156,8 +196,7 @@
             </div>
           </div>
           <div class="aboutL2">
-            © 2021 - Beijing Liguo Electronic Technology Co.,Ltd. All rights
-            reserved.
+            © 2021 - Beijing Liguo Electronic Technology Co.,Ltd. All rights reserved.
           </div>
         </div>
         <div class="aboutR">
@@ -225,7 +264,7 @@ td {
 td {
   width: 200px;
 }
-tr td:nth-child(1){
+tr td:nth-child(1) {
   font-size: 16px;
   background: #243665;
   color: #fff;
@@ -419,5 +458,13 @@ tr td:nth-child(1){
   font-size: 16px;
   line-height: 50px;
   margin: 0;
+}
+.jiimg {
+  width: 100%;
+  height: 100%;
+  transition: all 1s;
+}
+.jiimg:hover {
+  transform: scale(1.3);
 }
 </style>

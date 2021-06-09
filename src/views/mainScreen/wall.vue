@@ -21,10 +21,7 @@
       </div>
       <div class="cardli">
         <div class="btn_normalsquare cardbtn" @click="cancelCard()">取消</div>
-        <div
-          class="btn_normalsquare cardbtn"
-          @click="createView(row, column, true)"
-        >
+        <div class="btn_normalsquare cardbtn" @click="createView(row, column, true)">
           确定
         </div>
       </div>
@@ -41,11 +38,7 @@
           ref="ptopContentL"
           :style="'padding:10px ' + eqIntervalL + 'px'"
         >
-          <viewCon
-            v-for="(item, index) in inVCon"
-            :key="index"
-            :typeCon="item"
-          ></viewCon>
+          <viewCon v-for="(item, index) in inVCon" :key="index" :typeCon="item"></viewCon>
         </div>
       </div>
       <div class="ptopBox ptopBoxR">
@@ -63,19 +56,11 @@
         >
           <template v-slot:footer>
             <a-button key="back" @click="addwallCancel"> 取消 </a-button>
-            <a-button key="submit" type="primary" @click="addwallSet">
-              确定
-            </a-button>
+            <a-button key="submit" type="primary" @click="addwallSet"> 确定 </a-button>
           </template>
           <div class="grouptit">
             <p>电视墙名称：</p>
-            <input
-              type="text"
-              name=""
-              id=""
-              class="input_small"
-              v-model="addwallname"
-            />
+            <input type="text" name="" id="" class="input_small" v-model="addwallname" />
           </div>
         </a-modal>
         <div
@@ -119,11 +104,7 @@
             <div class="multiview">
               <div class="multiviewCon" @click="allView()">
                 <div class="viewAll" :class="{ allBox_select: allBoxSelect }">
-                  <div
-                    :style="
-                      'width:' + allwidth + 'px;height:' + allheight + 'px'
-                    "
-                  >
+                  <div :style="'width:' + allwidth + 'px;height:' + allheight + 'px'">
                     <div
                       v-for="(item, index) in viewBox"
                       :key="index"
@@ -164,12 +145,16 @@
             </div>
             <div class="wallname">
               <h2>名称</h2>
+              <input class="input_small" type="text" name="" id="" v-model="wallname" />
+            </div>
+            <div class="wallname">
+              <h2>模式</h2>
               <input
                 class="input_small"
-                type="text"
+                type="checkbox"
                 name=""
                 id=""
-                v-model="wallname"
+                v-model="wallmode"
               />
             </div>
             <div class="multistyle">
@@ -319,10 +304,7 @@
               </div>
               <div class="btn_normalsquare" @click="setwall(1)">设置</div>
             </div>
-            <div
-              class="btn_bigcircular return_btn"
-              @click="closeWallPage()"
-            ></div>
+            <div class="btn_bigcircular return_btn" @click="closeWallPage()"></div>
           </div>
         </div>
       </div>
@@ -432,6 +414,7 @@ export default {
       bazel_bottom: 0,
       bazel_right: 0,
       resolution: 0,
+      wallmode: false,
     };
   },
   watch: {
@@ -459,12 +442,12 @@ export default {
         this.bezel_right = this.bezelright;
         this.resolution = this.fblselect;
       }
-      console.log(`this.bezel_top ${this.bezel_top}`);
-      console.log(`this.bezel_left ${this.bezel_left}`);
-      console.log(`this.bezel_bottom ${this.bezel_bottom}`);
-      console.log(`this.bezel_right ${this.bezel_right}`);
-      console.log(`this.resolution ${this.resolution}`);
-      console.dir(this.layoutMsg);
+      // console.log(`this.bezel_top ${this.bezel_top}`);
+      // console.log(`this.bezel_left ${this.bezel_left}`);
+      // console.log(`this.bezel_bottom ${this.bezel_bottom}`);
+      // console.log(`this.bezel_right ${this.bezel_right}`);
+      // console.log(`this.resolution ${this.resolution}`);
+      // console.dir(this.layoutMsg);
     },
   },
   computed: {},
@@ -472,9 +455,7 @@ export default {
     closeWallPage() {
       let that = this;
       for (let i = 0; i < that.layoutMsg.length; i++) {
-        that.layoutMsg[i].Output.width = parseInt(
-          that.layoutMsg[i].fbl.split("×")[0]
-        );
+        that.layoutMsg[i].Output.width = parseInt(that.layoutMsg[i].fbl.split("×")[0]);
         that.layoutMsg[i].Output.height = parseInt(
           that.layoutMsg[i].fbl.split("×")[1].split("@")[0]
         );
@@ -918,14 +899,12 @@ export default {
               let column = 1;
               for (let j = 1; j < wallInfo[i].layout.length; j++) {
                 if (
-                  wallInfo[i].layout[0].layout.top ==
-                  wallInfo[i].layout[j].layout.top
+                  wallInfo[i].layout[0].layout.top == wallInfo[i].layout[j].layout.top
                 ) {
                   column++;
                 }
                 if (
-                  wallInfo[i].layout[0].layout.left ==
-                  wallInfo[i].layout[j].layout.left
+                  wallInfo[i].layout[0].layout.left == wallInfo[i].layout[j].layout.left
                 ) {
                   row++;
                 }
@@ -1135,9 +1114,7 @@ export default {
             if (that.layoutMsg[0].layout.top == that.layoutMsg[i].layout.top) {
               column++;
             }
-            if (
-              that.layoutMsg[0].layout.left == that.layoutMsg[i].layout.left
-            ) {
+            if (that.layoutMsg[0].layout.left == that.layoutMsg[i].layout.left) {
               row++;
             }
           }
@@ -1180,18 +1157,11 @@ export default {
               deviceInfo[i].type = "outV";
               deviceInfo[i].contenttype = "";
               if (deviceInfo[i].HDMI[0].subscript[0].config.mode === null) {
-                deviceInfo[i].output =
-                  deviceInfo[i].HDMI[0].subscript[0].config.output;
-              } else if (
-                deviceInfo[i].HDMI[0].subscript[0].config.mode === "videowall"
-              ) {
-                deviceInfo[i].output =
-                  deviceInfo[i].HDMI[0].sink[0].info.signal.video;
-                deviceInfo[i].output.fps =
-                  deviceInfo[i].output.frames_per_second;
-              } else if (
-                deviceInfo[i].HDMI[0].subscript[0].config.mode === "multiview"
-              ) {
+                deviceInfo[i].output = deviceInfo[i].HDMI[0].subscript[0].config.output;
+              } else if (deviceInfo[i].HDMI[0].subscript[0].config.mode === "videowall") {
+                deviceInfo[i].output = deviceInfo[i].HDMI[0].sink[0].info.signal.video;
+                deviceInfo[i].output.fps = deviceInfo[i].output.frames_per_second;
+              } else if (deviceInfo[i].HDMI[0].subscript[0].config.mode === "multiview") {
                 deviceInfo[i].contentname =
                   deviceInfo[i].HDMI[0].subscript[0].config.template;
                 let multi = that.$store.state.deviceInfo.multiview;
@@ -1289,10 +1259,7 @@ export default {
       }
       let len = 0;
       for (let i = 0; i < this.wallname.length; i++) {
-        if (
-          this.wallname.charCodeAt(i) > 127 ||
-          this.wallname.charCodeAt(i) == 94
-        ) {
+        if (this.wallname.charCodeAt(i) > 127 || this.wallname.charCodeAt(i) == 94) {
           len += 2;
         } else {
           len++;
@@ -1359,7 +1326,7 @@ export default {
                 data: {
                   name: that.wallname,
                   origin: that.getMsg.origin,
-                  mode: "wall_fs",
+                  mode: that.wallmode ? "wall" : "wall_fs",
                 },
               },
             };
@@ -1430,9 +1397,7 @@ export default {
     if (this.$store.state.wallConPage) {
       let that = this;
       for (let i = 0; i < that.layoutMsg.length; i++) {
-        that.layoutMsg[i].Output.width = parseInt(
-          that.layoutMsg[i].fbl.split("×")[0]
-        );
+        that.layoutMsg[i].Output.width = parseInt(that.layoutMsg[i].fbl.split("×")[0]);
         that.layoutMsg[i].Output.height = parseInt(
           that.layoutMsg[i].fbl.split("×")[1].split("@")[0]
         );
@@ -1568,10 +1533,7 @@ export default {
 .card {
   height: 180px;
   width: 260px;
-  background: -webkit-linear-gradient(
-    rgba(250, 250, 250, 1) 25%,
-    rgba(210, 210, 210, 1)
-  );
+  background: -webkit-linear-gradient(rgba(250, 250, 250, 1) 25%, rgba(210, 210, 210, 1));
   border-radius: 10px;
   position: absolute;
   left: 50%;
